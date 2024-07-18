@@ -1,4 +1,6 @@
-﻿namespace Mastery.Career.UnitTests;
+﻿using Mastery.Career.Domain;
+
+namespace Mastery.Career.UnitTests;
 
 public sealed class CompanyTests
 {
