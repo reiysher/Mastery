@@ -36,7 +36,7 @@ public sealed class CompanyTests
     public void Company_rank_was_changed()
     {
         // Arrange
-        Guid rankId = Guid.NewGuid();
+        RankId rankId = RankId.Random();
         Company sut = Company.New(new CompanyId(Guid.NewGuid()));
 
         // Act

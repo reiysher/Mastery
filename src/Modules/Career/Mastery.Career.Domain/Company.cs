@@ -7,7 +7,7 @@ public sealed class Company
 
     public required CompanyId Id { get; init; }
 
-    public Guid? RankId { get; private set; }
+    public RankId? RankId { get; private set; }
 
     public static Company New(CompanyId id)
     {
@@ -18,7 +18,7 @@ public sealed class Company
         };
     }
 
-    public void SetRank(Guid rankId)
+    public void SetRank(RankId rankId)
     {
         RankId = rankId;
     }
