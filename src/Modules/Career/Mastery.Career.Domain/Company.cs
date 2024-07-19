@@ -5,11 +5,11 @@ public sealed class Company
 {
     private Company() { }
 
-    public Guid Id { get; init; }
+    public required CompanyId Id { get; init; }
 
     public Guid? RankId { get; private set; }
 
-    public static Company New(Guid id)
+    public static Company New(CompanyId id)
     {
         return new Company()
         {
