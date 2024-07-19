@@ -16,6 +16,7 @@ public sealed class CompanyTests
         // Assert
         sut.Id.Should().Be(companyId);
         sut.RankId.Should().BeNull();
+        sut.PlatformRanks.Should().BeEmpty();
     }
 
     [Fact]
