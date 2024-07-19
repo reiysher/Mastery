@@ -9,6 +9,10 @@ public sealed class Company
 
     public RankId? RankId { get; private set; }
 
+    private ICollection<PlatformRank> _platformRanks = [];
+
+    public ICollection<PlatformRank> PlatformRanks => [.. _platformRanks];
+
     public static Company New(CompanyId id)
     {
         return new Company()
