@@ -19,6 +19,20 @@ public sealed class CompanyTests
     }
 
     [Fact]
+    public void Company_id_does_not_created_with_default_value()
+    {
+        // Arrange
+        Guid value = Guid.Empty;
+
+        // Act
+        var action = () => new CompanyId(value);
+
+        // Assert
+        action.Should().Throw<ArgumentException>().Which
+            .Message.Should().Be(CompanyExceptions.InvalidIdInput);
+    }
+
+    [Fact]
     public void Company_rank_was_changed()
     {
         // Arrange
