@@ -4,13 +4,25 @@ public sealed record CompanyId
 {
     public Guid Value { get; init; }
 
-    public CompanyId(Guid value)
+    private CompanyId() { }
+
+    public static CompanyId Random()
+    {
+        return new CompanyId { Value = Guid.NewGuid() };
+    }
+
+    public static CompanyId New(Guid value)
     {
         if (value == default)
         {
             throw new ArgumentException(CompanyExceptions.InvalidIdInput);
         }
 
-        Value = value;
+        return new CompanyId { Value = value };
+    }
+
+    public static CompanyId CopyOf(RankId other)
+    {
+        return new CompanyId { Value = other.Value };
     }
 }

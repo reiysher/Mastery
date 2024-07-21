@@ -8,7 +8,7 @@ public sealed class CompanyTests
     public void The_company_is_correctly_created()
     {
         // Arrange
-        CompanyId companyId = new CompanyId(Guid.NewGuid());
+        CompanyId companyId = CompanyId.Random();
 
         // Act
         Company sut = Company.New(companyId);
@@ -26,7 +26,7 @@ public sealed class CompanyTests
         Guid value = Guid.Empty;
 
         // Act
-        var action = () => new CompanyId(value);
+        var action = () => CompanyId.New(value);
 
         // Assert
         action.Should().Throw<ArgumentException>().Which
@@ -38,7 +38,7 @@ public sealed class CompanyTests
     {
         // Arrange
         RankId rankId = RankId.Random();
-        Company sut = Company.New(new CompanyId(Guid.NewGuid()));
+        Company sut = Company.New(CompanyId.Random());
 
         // Act
         sut.SetRank(rankId);
