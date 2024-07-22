@@ -11,7 +11,7 @@ public sealed record CompanyId
         return new CompanyId { Value = Guid.NewGuid() };
     }
 
-    public static CompanyId New(Guid value)
+    public static CompanyId From(Guid value)
     {
         if (value == default)
         {
