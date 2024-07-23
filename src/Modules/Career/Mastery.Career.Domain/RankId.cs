@@ -11,7 +11,7 @@ public sealed record RankId
         return new RankId { Value = Guid.NewGuid() };
     }
 
-    public static RankId New(Guid value)
+    public static RankId From(Guid value)
     {
         return new RankId { Value = value };
     }
