@@ -26,7 +26,7 @@ public sealed class CompanyTests
         Guid value = Guid.Empty;
 
         // Act
-        var action = () => CompanyId.New(value);
+        var action = () => CompanyId.From(value);
 
         // Assert
         action.Should().Throw<ArgumentException>().Which

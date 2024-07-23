@@ -9,7 +9,7 @@ public sealed class RankTests
     {
         // Arrange
         string rankName = "A";
-        RankId rankId = RankId.New(Guid.NewGuid());
+        RankId rankId = RankId.From(Guid.NewGuid());
 
         // Act
         Rank rank = Rank.New(rankId, rankName);
