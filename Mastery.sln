@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Career.Infrastructu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C87DA476-5899-4C68-BCA7-2862A28CDEDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastery.Career.UnitTests", "src\Modules\Career\tests\Mastery.Career.UnitTests\Mastery.Career.UnitTests.csproj", "{72C458FE-A106-43AE-89CC-5D0A7CD13F08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Career.UnitTests", "src\Modules\Career\tests\Mastery.Career.UnitTests\Mastery.Career.UnitTests.csproj", "{72C458FE-A106-43AE-89CC-5D0A7CD13F08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
