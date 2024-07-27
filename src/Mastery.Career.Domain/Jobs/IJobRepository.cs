@@ -2,7 +2,7 @@
 
 public interface IJobRepository
 {
-    Task<Job?> GetByIdAsync(JobId jobId, CancellationToken cancellationToken = default);
+    Task<Job?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     void Add(Job job);
 }

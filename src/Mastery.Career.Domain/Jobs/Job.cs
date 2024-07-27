@@ -2,11 +2,11 @@
 
 namespace Mastery.Career.Domain.Jobs;
 
-public sealed class Job : Aggregate<JobId>
+public sealed class Job : Aggregate<Guid>
 {
     private Job() { }
 
-    public CompanyId CompanyId { get; private init; } = default!;
+    public Guid CompanyId { get; private init; } = default!;
 
     public string Title { get; private set; } = default!;
 
@@ -22,7 +22,7 @@ public sealed class Job : Aggregate<JobId>
     {
         return new Job
         {
-            Id = JobId.From(id),
+            Id = id,
             CompanyId = company.Id,
             Title = title,
             Url = url,

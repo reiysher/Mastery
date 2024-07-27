@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Career.Domain.Users;
 
-public sealed class User : Aggregate<UserId>
+public sealed class User : Aggregate<Guid>
 {
     private User() { }
 
@@ -12,7 +12,7 @@ public sealed class User : Aggregate<UserId>
     {
         var user =  new User
         {
-            Id = UserId.New(),
+            Id = Guid.NewGuid(),
             Name = FullName.From(firstName, lastName),
             Email = Email.Create(email),
         };

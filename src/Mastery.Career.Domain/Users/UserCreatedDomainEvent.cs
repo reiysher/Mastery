@@ -1,3 +1,3 @@
 ﻿namespace Mastery.Career.Domain.Users;
 
-public sealed record UserCreatedDomainEvent(UserId UserId) : IDomainEvent;
+public sealed record UserCreatedDomainEvent(Guid UserId) : IDomainEvent;

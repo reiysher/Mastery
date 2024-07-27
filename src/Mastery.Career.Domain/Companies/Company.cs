@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Career.Domain.Companies;
 
-public sealed class Company : Aggregate<CompanyId>
+public sealed class Company : Aggregate<Guid>
 {
     private Company() { }
 
@@ -18,7 +18,7 @@ public sealed class Company : Aggregate<CompanyId>
     {
         return new Company
         {
-            Id = CompanyId.From(id),
+            Id = id,
             Title = CompanyTitle.From(title),
             Category = null,
             Note = null,

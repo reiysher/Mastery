@@ -10,7 +10,7 @@ public sealed record CompanyCategory
 
     public required string Color { get; init; }
 
-    public CategoryId? CategoryId { get; init; }
+    public Guid? CategoryId { get; init; }
 
     public static CompanyCategory From(Category category)
     {
