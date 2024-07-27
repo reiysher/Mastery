@@ -1,12 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Mastery.Career.Domain.Companies;
+﻿namespace Mastery.Career.Domain.Companies;
 
 public sealed record CompanyId
 {
-    public required Guid Value { get; init; }
+    public Guid Value { get; init; }
 
-    [SetsRequiredMembers]
     private CompanyId(Guid value)
     {
         Value = value;
