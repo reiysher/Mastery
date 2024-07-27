@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Career.Domain.Users;
 
-public sealed class User : Entity<UserId>
+public sealed class User : Aggregate<UserId>
 {
     private User() { }
 

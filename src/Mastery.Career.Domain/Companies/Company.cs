@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Career.Domain.Companies;
 
-public sealed class Company : Entity<CompanyId>
+public sealed class Company : Aggregate<CompanyId>
 {
     private Company() { }
 

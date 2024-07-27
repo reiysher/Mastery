@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Career.Domain.Categories;
 
-public sealed class Category : Entity<CategoryId>
+public sealed class Category : Aggregate<CategoryId>
 {
     public Category() { }
 

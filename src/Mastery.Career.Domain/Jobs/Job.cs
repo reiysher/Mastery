@@ -2,7 +2,7 @@
 
 namespace Mastery.Career.Domain.Jobs;
 
-public sealed class Job : Entity<JobId>
+public sealed class Job : Aggregate<JobId>
 {
     private Job() { }
 
