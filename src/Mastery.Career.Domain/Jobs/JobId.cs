@@ -1,12 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Mastery.Career.Domain.Jobs;
+﻿namespace Mastery.Career.Domain.Jobs;
 
 public sealed record JobId
 {
-    public required Guid Value { get; init; }
+    public Guid Value { get; init; }
 
-    [SetsRequiredMembers]
     private JobId(Guid value)
     {
         Value = value;
