@@ -1,0 +1,10 @@
+﻿using Mastery.Career.Domain.Abstractions;
+using MediatR;
+
+namespace Mastery.Career.Application.Abstractions.Messaging;
+
+public interface ICommandHandler<TCommand> : IRequestHandler<TCommand, Result>
+    where TCommand : ICommand;
+
+public interface ICommandHandler<TCommand, TResponse> : IRequestHandler<TCommand, Result<TResponse>>
+    where TCommand : ICommand<TResponse>;
