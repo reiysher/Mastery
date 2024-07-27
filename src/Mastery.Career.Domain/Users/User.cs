@@ -10,11 +10,15 @@ public sealed class User : Aggregate<UserId>
 
     public static User Create(string firstName, string lastName, string email)
     {
-        return new User
+        var user =  new User
         {
             Id = UserId.New(),
             Name = FullName.From(firstName, lastName),
             Email = Email.Create(email),
         };
+
+        user.RaiseDomainEvent(new UserCreatedDomainEvent(user.Id));
+
+        return user;
     }
 }
