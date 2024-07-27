@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Career.Domain.Categories;
 
-public sealed class Category : Aggregate<CategoryId>
+public sealed class Category : Aggregate<Guid>
 {
     public Category() { }
 
@@ -8,16 +8,71 @@ public sealed class Category : Aggregate<CategoryId>
 
     public Color Color { get; private set; } = default!;
 
-    public static Category Create(Guid id, string value, Color color)
+    public bool IsDeleted { get; private set; }
+
+    public static Category Create(Guid id, string value, string color)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
         ArgumentNullException.ThrowIfNull(color);
 
-        return new Category
+        var category = new Category
         {
-            Id = CategoryId.From(id),
+            Id = id,
             Value = value,
-            Color = color,
+            Color = Color.New(color),
+            IsDeleted = false,
         };
+
+        category.RaiseDomainEvent(new CategoryCreatedDomainEvent(category.Id));
+
+        return category;
+    }
+
+    public void Delete()
+    {
+        IsDeleted = true;
+
+        RaiseDomainEvent(new CategoryDeletedDomainEvent(Id));
+    }
+
+    public void Update(string? value, string? color)
+    {
+        if (!string.IsNullOrWhiteSpace(value))
+        {
+            UpdateValue(value);
+        }
+
+        if (!string.IsNullOrWhiteSpace(color))
+        {
+            UpdateColor(color);
+        }
+    }
+
+    public void UpdateValue(string? value)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+
+        if (Value == value)
+        {
+            return;
+        }
+
+        Value = value;
+
+        RaiseDomainEvent(new CategoryValueUpdated(Id, value));
+    }
+
+    public void UpdateColor(string? color)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(color);
+
+        if (Color.Value == color)
+        {
+            return;
+        }
+
+        Color = Color.New(color);
+
+        RaiseDomainEvent(new CategoryColorUpdated(Id, Color.Value));
     }
 }
