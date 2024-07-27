@@ -2,7 +2,7 @@
 
 public sealed record JobResponse
 {
-    public DateTimeOffset? Date { get; init; }
+    public DateOnly? Date { get; init; }
 
     public string? Result { get; init; }
 }
