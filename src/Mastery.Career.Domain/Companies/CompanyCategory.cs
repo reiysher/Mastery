@@ -12,8 +12,13 @@ public sealed record CompanyCategory
 
     public Guid? CategoryId { get; init; }
 
-    public static CompanyCategory From(Category category)
+    public static CompanyCategory? From(Category? category)
     {
+        if (category is null)
+        {
+            return null;
+        }
+
         return new CompanyCategory
         {
             CategoryId = category.Id,

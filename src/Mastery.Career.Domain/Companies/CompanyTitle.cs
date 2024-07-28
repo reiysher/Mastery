@@ -9,7 +9,7 @@ public sealed record CompanyTitle
         Value = value;
     }
 
-    public static CompanyTitle From(string value)
+    public static CompanyTitle From(string? value)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value, nameof(value));
 

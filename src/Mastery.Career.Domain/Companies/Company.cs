@@ -1,4 +1,6 @@
-﻿namespace Mastery.Career.Domain.Companies;
+﻿using Mastery.Career.Domain.Categories;
+
+namespace Mastery.Career.Domain.Companies;
 
 public sealed class Company : Aggregate<Guid>
 {
@@ -14,14 +16,47 @@ public sealed class Company : Aggregate<Guid>
 
     public Note? Note { get; private set; }
 
-    public static Company Create(Guid id, string title)
+    public static Company Create(Guid id, string? title, string? note = "", Category? category = null)
     {
-        return new Company
+        var company = new Company
         {
             Id = id,
             Title = CompanyTitle.From(title),
-            Category = null,
-            Note = null,
+            Category = CompanyCategory.From(category),
+            Note = Note.New(note),
         };
+
+        company.RaiseDomainEvent(new CompanyCreatedDomainEvent(company.Id));
+
+        return company;
+    }
+
+    public void ChangeTitle(string? title)
+    {
+        if (!string.IsNullOrWhiteSpace(title) && title != Title.Value)
+        {
+            Title = CompanyTitle.From(title);
+
+            RaiseDomainEvent(new CompanyTitleChangedDomainEvent(Id, Title.Value));
+        }
+    }
+
+    public void ChangeCategory(Category? category)
+    {
+        ArgumentNullException.ThrowIfNull(category, nameof(category));
+
+        if (category.Id != Category?.CategoryId)
+        {
+            Category = CompanyCategory.From(category);
+
+            RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category!.CategoryId!.Value));
+        }
+    }
+
+    public void WriteNote(string? value)
+    {
+        Note = Note.New(value);
+
+        RaiseDomainEvent(new CompanyNoteWrittenDomainEvent(Id, Note.Value));
     }
 }
