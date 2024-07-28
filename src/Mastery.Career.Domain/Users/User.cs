@@ -2,11 +2,11 @@
 
 public sealed class User : Aggregate<Guid>
 {
-    private User() { }
-
     public FullName Name { get; private set; } = default!;
 
     public Email Email { get; private set;} = default!;
+
+    private User() { }
 
     public static User Create(string firstName, string lastName, string email)
     {

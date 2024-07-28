@@ -1,3 +1,3 @@
 ﻿namespace Mastery.Career.Domain.Companies;
 
-public sealed record CompanyNoteWrittenDomainEvent(Guid DompanyId, string Note) : IDomainEvent;
+public sealed record CompanyNoteWrittenDomainEvent(Guid CompanyId, string Note) : IDomainEvent;

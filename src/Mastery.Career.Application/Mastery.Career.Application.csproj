@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Jobs\" />
-    <Folder Include="Users\" />
+    <Folder Include="Users\Create\" />
   </ItemGroup>
 
 </Project>
