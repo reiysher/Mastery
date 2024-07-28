@@ -3,17 +3,17 @@ using Mastery.Career.Application.Abstractions.Messaging;
 using Mastery.Career.Domain.Abstractions;
 using Mastery.Career.Domain.Categories;
 
-namespace Mastery.Career.Application.Categories.Update;
+namespace Mastery.Career.Application.Categories.ChangeValue;
 
-internal sealed class UpdateCategoryCommandHandler(
+internal sealed class ChangeCategoryValueCommandHandler(
     ICategoryRepository categoryRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<UpdateCategoryCommand>
+    : ICommandHandler<ChangeCategoryValueCommand>
 {
     private readonly ICategoryRepository categoryRepository = categoryRepository;
     private readonly IUnitOfWork unitOfWork = unitOfWork;
 
-    public async Task<Result> Handle(UpdateCategoryCommand command, CancellationToken cancellationToken)
+    public async Task<Result> Handle(ChangeCategoryValueCommand command, CancellationToken cancellationToken)
     {
         Category? category = await categoryRepository.GetByIdAsync(command.CategoryId, cancellationToken);
 
@@ -22,7 +22,7 @@ internal sealed class UpdateCategoryCommandHandler(
             return Result.Failure(CategoryErrors.NotFound);
         }
 
-        category.Update(command.Value, command.Color);
+        category.ChangeValue(command.Value);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

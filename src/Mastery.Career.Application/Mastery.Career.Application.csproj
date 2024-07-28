@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Companies\Create\" />
     <Folder Include="Jobs\" />
-    <Folder Include="Companies\" />
     <Folder Include="Users\" />
   </ItemGroup>
 

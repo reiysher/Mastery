@@ -35,20 +35,7 @@ public sealed class Category : Aggregate<Guid>
         RaiseDomainEvent(new CategoryDeletedDomainEvent(Id));
     }
 
-    public void Update(string? value, string? color)
-    {
-        if (!string.IsNullOrWhiteSpace(value))
-        {
-            UpdateValue(value);
-        }
-
-        if (!string.IsNullOrWhiteSpace(color))
-        {
-            UpdateColor(color);
-        }
-    }
-
-    public void UpdateValue(string? value)
+    public void ChangeValue(string? value)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
@@ -62,7 +49,7 @@ public sealed class Category : Aggregate<Guid>
         RaiseDomainEvent(new CategoryValueUpdated(Id, value));
     }
 
-    public void UpdateColor(string? color)
+    public void ChangeColor(string? color)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(color);
 
