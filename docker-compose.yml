@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  career.api:
+    image: ${DOCKER_REGISTRY-}careerapi
+    container_name: Career.Api
+    build:
+      context: .
+      dockerfile: src/Mastery.Career.Api/Dockerfile
+
+  career.db:
+    image: postgres:latest
+    container_name: Career.Db
+    environment:
+      - POSTGRES_DB=career
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+

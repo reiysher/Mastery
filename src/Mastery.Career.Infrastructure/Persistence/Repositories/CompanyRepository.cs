@@ -11,7 +11,7 @@ internal sealed class CompanyRepository(ApplicationDbContext dbContext)
     {
         return await DbContext
             .Set<Company>()
-            .Where(company => company.Category!.CategoryId == categoryId)
+            .Where(company => company.Category!.Id == categoryId)
             .ToArrayAsync(cancellationToken);
     }
 }

@@ -16,11 +16,13 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         {
             nameBuilder
                 .Property(name => name.FirstName)
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .HasColumnName("first_name");
 
             nameBuilder
                 .Property(name => name.LastName)
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .HasColumnName("last_name");
         });
 
         builder.Property(user => user.Email)

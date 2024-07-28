@@ -11,7 +11,7 @@ public sealed class ApplicationDbContext(
     IPublisher publisher)
     : DbContext(options), IUnitOfWork
 {
-    private readonly IPublisher publisher = publisher;
+    private readonly IPublisher _publisher = publisher;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,7 +53,7 @@ public sealed class ApplicationDbContext(
 
         foreach (var domainEvent in domainEvents)
         {
-            await publisher.Publish(domainEvent);
+            await _publisher.Publish(domainEvent);
         }
     }
 }

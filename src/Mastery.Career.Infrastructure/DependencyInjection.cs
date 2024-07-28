@@ -24,6 +24,7 @@ public static class DependencyInjection
             options.UseNpgsql(connectionString, builder =>
             {
                 builder.MigrationsHistoryTable("ef_migrations_history");
+                builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
             });
 
             options.UseSnakeCaseNamingConvention();

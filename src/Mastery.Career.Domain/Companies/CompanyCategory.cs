@@ -6,11 +6,11 @@ public sealed record CompanyCategory
 {
     private CompanyCategory() { }
 
+    public Guid? Id { get; init; }
+
     public required string Value { get; init; }
 
     public required string Color { get; init; }
-
-    public Guid? CategoryId { get; init; }
 
     public static CompanyCategory? From(Category? category)
     {
@@ -21,7 +21,7 @@ public sealed record CompanyCategory
 
         return new CompanyCategory
         {
-            CategoryId = category.Id,
+            Id = category.Id,
             Value = category.Value,
             Color = category.Color.Value,
         };

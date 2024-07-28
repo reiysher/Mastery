@@ -45,11 +45,11 @@ public sealed class Company : Aggregate<Guid>
     {
         ArgumentNullException.ThrowIfNull(category, nameof(category));
 
-        if (category.Id != Category?.CategoryId)
+        if (category.Id != Category?.Id)
         {
             Category = CompanyCategory.From(category);
 
-            RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.CategoryId));
+            RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
         }
     }
 
@@ -57,7 +57,7 @@ public sealed class Company : Aggregate<Guid>
     {
         Category = CompanyCategory.Default();
 
-        RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.CategoryId));
+        RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
     }
 
     public void WriteNote(string? value)

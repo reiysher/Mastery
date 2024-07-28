@@ -1,0 +1,6 @@
+@Mastery.Career.Api_HostAddress = http://localhost:5229
+
+GET {{Mastery.Career.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
