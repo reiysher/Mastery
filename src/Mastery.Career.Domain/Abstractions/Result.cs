@@ -1,4 +1,6 @@
-﻿namespace Mastery.Career.Domain.Abstractions;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Mastery.Career.Domain.Abstractions;
 
 public class Result
 {
@@ -45,6 +47,8 @@ public class Result<TValue> : Result
         _value = value;
     }
 
+
+    [NotNull]
     public TValue? Value => IsSuccess ? _value : throw new InvalidOperationException("The value of a failure result can not be accessed.");
 
     public static implicit operator Result<TValue>(TValue? value) => Create(value);

@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Mastery.Career.Domain\Mastery.Career.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Users\Create\" />
-  </ItemGroup>
-
 </Project>

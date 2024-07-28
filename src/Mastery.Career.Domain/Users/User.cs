@@ -6,6 +6,8 @@ public sealed class User : Aggregate<Guid>
 
     public Email Email { get; private set;} = default!;
 
+    public string IdentityId { get; private set; } = string.Empty;
+
     private User() { }
 
     public static User Create(string firstName, string lastName, string email)
@@ -20,5 +22,10 @@ public sealed class User : Aggregate<Guid>
         user.RaiseDomainEvent(new UserCreatedDomainEvent(user.Id));
 
         return user;
+    }
+
+    public void SetIdentityId(string identityId)
+    {
+        IdentityId = identityId;
     }
 }
