@@ -2,24 +2,28 @@
 
 public sealed class Category : Aggregate<Guid>
 {
-    public Category() { }
-
     public string Value { get; private set; } = default!;
 
     public Color Color { get; private set; } = default!;
 
+    public string Description { get; private set; } = default!;
+
     public bool IsDeleted { get; private set; }
 
-    public static Category Create(Guid id, string value, string color)
+    private Category() { }
+
+    public static Category Create(Guid id, string value, string color, string? description = "")
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
         ArgumentNullException.ThrowIfNull(color);
+        ArgumentException.ThrowIfNullOrWhiteSpace(description);
 
         var category = new Category
         {
             Id = id,
             Value = value,
             Color = Color.New(color),
+            Description = description,
             IsDeleted = false,
         };
 

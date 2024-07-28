@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Career.Domain.Abstractions;
 
-public abstract class Aggregate<TId> : Entity<TId>
+public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot
     where TId : notnull
 {
     private readonly List<IDomainEvent> _domainEvents = [];

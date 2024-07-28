@@ -4,8 +4,6 @@ namespace Mastery.Career.Domain.Companies;
 
 public sealed class Company : Aggregate<Guid>
 {
-    private Company() { }
-
     public CompanyTitle Title { get; private set; } = default!;
 
     public CompanyCategory? Category { get; private set; }
@@ -15,6 +13,8 @@ public sealed class Company : Aggregate<Guid>
     public IReadOnlyCollection<Rating> Ratings => _ratings.AsReadOnly();
 
     public Note? Note { get; private set; }
+
+    private Company() { }
 
     public static Company Create(Guid id, string? title, string? note = "", Category? category = null)
     {

@@ -12,9 +12,9 @@ public sealed class Job : Aggregate<Guid>
 
     public Note? Note { get; private set; }
 
-    private readonly List<JobResponse> _jobResponses = [];
+    private readonly List<JobResponse> _responses = [];
 
-    public IReadOnlyCollection<JobResponse> JobResponses => _jobResponses.AsReadOnly();
+    public IReadOnlyCollection<JobResponse> Responses => _responses.AsReadOnly();
 
     private Job() { }
 
@@ -70,14 +70,14 @@ public sealed class Job : Aggregate<Guid>
             date,
             ResponseStatus.Delivered);
 
-        _jobResponses.Add(response);
+        _responses.Add(response);
 
         RaiseDomainEvent(new JobRespondedDomainEvent(Id, response.Id));
     }
 
     public void RespondScheduledResponse(Guid responseId)
     {
-        var response = _jobResponses
+        var response = _responses
             .FirstOrDefault(r => r.Id == responseId);
 
         if (response is null)
@@ -98,7 +98,7 @@ public sealed class Job : Aggregate<Guid>
             date,
             ResponseStatus.Scheduled);
 
-        _jobResponses.Add(response);
+        _responses.Add(response);
 
         RaiseDomainEvent(new JobRespondScheduledDomainEvent(Id, response.Id));
     }

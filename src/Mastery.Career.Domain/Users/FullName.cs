@@ -2,11 +2,11 @@
 
 public sealed record FullName
 {
-    private FullName() { }
-
     public required string FirstName { get; init; }
 
     public required string LastName { get; init; }
+
+    private FullName() { }
 
     public static FullName From(string firstName, string lastName)
     {

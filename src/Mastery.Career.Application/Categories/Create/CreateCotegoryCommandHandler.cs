@@ -18,7 +18,8 @@ internal sealed class CreateCotegoryCommandHandler(
         var category = Category.Create(
             Guid.NewGuid(),
             command.Value,
-            command.Color);
+            command.Color,
+            command.Description);
 
         categoryRepository.Add(category);
 

@@ -2,5 +2,5 @@
 
 namespace Mastery.Career.Application.Categories.Create;
 
-public sealed record CreateCotegoryCommand(string Value, string Color) : ICommand<Guid>;
+public sealed record CreateCotegoryCommand(string Value, string Color, string? Description) : ICommand<Guid>;
 
