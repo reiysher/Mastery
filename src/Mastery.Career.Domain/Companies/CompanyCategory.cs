@@ -26,4 +26,9 @@ public sealed record CompanyCategory
             Color = category.Color.Value,
         };
     }
+
+    public static CompanyCategory? Default()
+    {
+        return null;
+    }
 }

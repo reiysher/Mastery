@@ -49,8 +49,15 @@ public sealed class Company : Aggregate<Guid>
         {
             Category = CompanyCategory.From(category);
 
-            RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category!.CategoryId!.Value));
+            RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.CategoryId));
         }
+    }
+
+    public void ResetCategory()
+    {
+        Category = CompanyCategory.Default();
+
+        RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.CategoryId));
     }
 
     public void WriteNote(string? value)

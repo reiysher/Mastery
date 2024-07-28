@@ -1,4 +1,4 @@
-﻿namespace Mastery.Career.Application.Abstractions;
+﻿namespace Mastery.Career.Application.Abstractions.Data;
 
 public interface IUnitOfWork
 {

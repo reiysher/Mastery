@@ -1,4 +1,4 @@
-﻿using Mastery.Career.Application.Abstractions;
+﻿using Mastery.Career.Application.Abstractions.Data;
 using Mastery.Career.Application.Abstractions.Messaging;
 using Mastery.Career.Domain.Abstractions;
 using Mastery.Career.Domain.Categories;
