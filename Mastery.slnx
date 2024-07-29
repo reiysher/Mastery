@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/Modules/Career/" />
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/API/">
+    <Project Path="src\API\Mastery.Api\Mastery.Api.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\Mastery.Career.Api\Mastery.Career.Api.csproj" />
+    <Project Path="src\Mastery.Career.Application\Mastery.Career.Application.csproj" />
+    <Project Path="src\Mastery.Career.Domain\Mastery.Career.Domain.csproj" />
+    <Project Path="src\Mastery.Career.Infrastructure\Mastery.Career.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+</Solution>

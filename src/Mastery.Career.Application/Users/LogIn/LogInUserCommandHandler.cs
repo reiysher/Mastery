@@ -5,22 +5,21 @@ using MediatR;
 
 namespace Mastery.Career.Application.Users.LogIn;
 
-internal sealed class LogInUserCommandHandler(
-    IJwtService jwtService)
-    : ICommandHandler<LogInUserCommand, AccessTokenResponse>
-{
-    public async Task<Result<AccessTokenResponse>> Handle(LogInUserCommand command, CancellationToken cancellationToken)
-    {
-        Result<string> result = await jwtService.GetAccessTokenAsync(
-            command.Email,
-            command.Password,
-            cancellationToken);
+//internal sealed class LogInUserCommandHandler(IJwtService jwtService)
+//    : ICommandHandler<LogInUserCommand, AccessTokenResponse>
+//{
+//    public async Task<Result<AccessTokenResponse>> Handle(LogInUserCommand command, CancellationToken cancellationToken)
+//    {
+//        Result<string> result = await jwtService.GetAccessTokenAsync(
+//            command.Email,
+//            command.Password,
+//            cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return Result.Failure<AccessTokenResponse>(UserErrors.InvalidCredentials);
-        }
+//        if (result.IsFailure)
+//        {
+//            return Result.Failure<AccessTokenResponse>(UserErrors.InvalidCredentials);
+//        }
 
-        return new AccessTokenResponse(result.Value);
-    }
-}
+//        return new AccessTokenResponse(result.Value);
+//    }
+//}
