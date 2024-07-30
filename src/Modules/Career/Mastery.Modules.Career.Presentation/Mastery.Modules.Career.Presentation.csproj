@@ -1,6 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
+	  <None Remove="NewFolder\appsettings.Development.json" />
+	  <None Remove="NewFolder\appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="NewFolder\appsettings.Development.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="NewFolder\appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
@@ -11,6 +29,13 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Mastery.Modules.Career.Application\Mastery.Modules.Career.Application.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="NewFolder\Properties\launchSettings.json">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>
