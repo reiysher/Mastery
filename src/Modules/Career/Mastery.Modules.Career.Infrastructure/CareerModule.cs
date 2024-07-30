@@ -6,8 +6,8 @@ using Mastery.Modules.Career.Domain.Companies;
 using Mastery.Modules.Career.Domain.Jobs;
 using Mastery.Modules.Career.Domain.Users;
 using Mastery.Modules.Career.Infrastructure.Authentication;
-using Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
 using Mastery.Modules.Career.Infrastructure.Persistence;
+using Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
 using Mastery.Modules.Career.Presentation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
+using FluentValidation;
 
 namespace Mastery.Modules.Career.Infrastructure;
 
@@ -28,6 +29,8 @@ public static class CareerModule
         {
             options.RegisterServicesFromAssembly(Application.AssemblyReference.Assembly);
         });
+
+        services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
 
         services.AddInfrastructure(configuration);
 
