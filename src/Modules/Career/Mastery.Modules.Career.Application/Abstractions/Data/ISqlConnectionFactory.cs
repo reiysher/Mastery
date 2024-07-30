@@ -4,5 +4,5 @@ namespace Mastery.Modules.Career.Application.Abstractions.Data;
 
 public interface ISqlConnectionFactory
 {
-    IDbConnection CreateConnection();
+    ValueTask<IDbConnection> OpenConnectionAsync(CancellationToken cancellationToken = default);
 }

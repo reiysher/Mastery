@@ -2,5 +2,5 @@
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
 
-internal sealed class UserRepository(ApplicationDbContext dbContext)
+internal sealed class UserRepository(CareerDbContext dbContext)
     : Repository<User, Guid>(dbContext), IUserRepository;

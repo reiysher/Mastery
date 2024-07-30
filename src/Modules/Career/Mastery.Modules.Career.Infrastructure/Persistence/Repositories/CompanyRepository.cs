@@ -3,7 +3,7 @@ using Mastery.Modules.Career.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
-internal sealed class CompanyRepository(ApplicationDbContext dbContext)
+internal sealed class CompanyRepository(CareerDbContext dbContext)
     : Repository<Company, Guid>(dbContext), ICompanyRepository
 {
     public async Task<IReadOnlyCollection<Company>> GetByCategoryIdAsync(

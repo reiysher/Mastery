@@ -12,13 +12,14 @@ internal sealed class GetCategoriesQueryHandler(
 {
     public async Task<Result<CategoriesResponse>> Handle(GetCategoriesQuery query, CancellationToken cancellationToken)
     {
-        using IDbConnection connection = sqlConnectionFactory.CreateConnection();
+        using IDbConnection connection = await sqlConnectionFactory.OpenConnectionAsync(cancellationToken);
 
-        string sql = """
+        const string sql =
+            $"""
             SELECT
-                id AS Id
-                value AS Value
-                color_value AS Color
+                id AS {nameof(CategoriesResponse.CategoryItem.Id)}
+                value AS {nameof(CategoriesResponse.CategoryItem.Value)}
+                color_value AS {nameof(CategoriesResponse.CategoryItem.Color)}
             FROM categories
             WHERE is_deleted = 'false'
             """;

@@ -4,15 +4,10 @@ using System.Data;
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence;
 
-internal sealed class SqlConnectionFactory(string connectionString) : ISqlConnectionFactory
+internal sealed class SqlConnectionFactory(NpgsqlDataSource dataSource) : ISqlConnectionFactory
 {
-    private readonly string connectionString = connectionString;
-
-    public IDbConnection CreateConnection()
+    public async ValueTask<IDbConnection> OpenConnectionAsync(CancellationToken cancellationToken = default)
     {
-        var conection = new NpgsqlConnection(connectionString);
-        conection.Open();
-
-        return conection;
+        return await dataSource.OpenConnectionAsync(cancellationToken);
     }
 }

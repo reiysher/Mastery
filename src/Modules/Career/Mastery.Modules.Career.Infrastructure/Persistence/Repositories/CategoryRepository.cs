@@ -2,5 +2,5 @@
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
 
-internal sealed class CategoryRepository(ApplicationDbContext dbContext)
+internal sealed class CategoryRepository(CareerDbContext dbContext)
     : Repository<Category, Guid>(dbContext), ICategoryRepository;

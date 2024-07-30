@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
 
-internal abstract class Repository<TAggregate, TId>(ApplicationDbContext dbContext)
+internal abstract class Repository<TAggregate, TId>(CareerDbContext dbContext)
     where TAggregate : Aggregate<TId>
     where TId : notnull
 {
-    protected readonly ApplicationDbContext DbContext = dbContext;
+    protected readonly CareerDbContext DbContext = dbContext;
 
     public async Task<TAggregate?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
     {

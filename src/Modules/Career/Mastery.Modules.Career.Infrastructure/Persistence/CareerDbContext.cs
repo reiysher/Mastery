@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence;
 
-public sealed class ApplicationDbContext(
-    DbContextOptions<ApplicationDbContext> options,
+public sealed class CareerDbContext(
+    DbContextOptions<CareerDbContext> options,
     IPublisher publisher)
     : DbContext(options), IUnitOfWork
 {
@@ -19,7 +19,7 @@ public sealed class ApplicationDbContext(
 
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CareerDbContext).Assembly);
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
