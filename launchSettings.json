@@ -3,8 +3,10 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "composeLaunchAction": "None",
+      "composeLaunchServiceName": "mastery.api",
       "serviceActions": {
-        "mastery.career.api": "StartDebugging",
+        "mastery.database": "StartWithoutDebugging",
         "mastery.api": "StartDebugging"
       }
     }

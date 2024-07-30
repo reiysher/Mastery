@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<ItemGroup>
-		<ProjectReference Include="..\Mastery.Modules.Career.Domain\Mastery.Modules.Career.Domain.csproj" />
-	</ItemGroup>
-
-</Project>

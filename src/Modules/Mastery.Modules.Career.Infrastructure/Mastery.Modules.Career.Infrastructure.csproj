@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<ItemGroup>
-		<ProjectReference Include="..\Mastery.Modules.Career.Application\Mastery.Modules.Career.Application.csproj" />
-		<ProjectReference Include="..\Mastery.Modules.Career.Presentation\Mastery.Modules.Career.Presentation.csproj" />
-	</ItemGroup>
-
-</Project>

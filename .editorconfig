@@ -83,6 +83,12 @@ csharp_style_unused_value_assignment_preference = discard_variable:silent
 csharp_space_around_binary_operators = before_and_after
 csharp_style_unused_value_expression_statement_preference = discard_variable:none
 
+# S4035: Classes implementing "IEquatable<T>" should be sealed
+dotnet_diagnostic.S4035.severity = none
+
+# S6602: "Find" method should be used instead of the "FirstOrDefault" extension
+dotnet_diagnostic.S6602.severity = none
+
 [*.{cs,vb}]
 dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 dotnet_style_prefer_simplified_interpolation = true:suggestion
