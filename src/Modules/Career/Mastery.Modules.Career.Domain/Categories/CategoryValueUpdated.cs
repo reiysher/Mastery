@@ -1,3 +1,8 @@
 ﻿namespace Mastery.Modules.Career.Domain.Categories;
 
-public sealed record CategoryValueUpdated(Guid CategoryId, string NewValue) : IDomainEvent;
+public sealed class CategoryValueUpdated(Guid categoryId, string newValue) : DomainEvent
+{
+    public Guid CategoryId { get; init; } = categoryId;
+
+    public string NewValue { get; init; } = newValue;
+}

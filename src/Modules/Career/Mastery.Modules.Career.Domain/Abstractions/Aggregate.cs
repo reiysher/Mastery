@@ -5,17 +5,14 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot
 {
     private readonly List<IDomainEvent> _domainEvents = [];
 
-    public IReadOnlyList<IDomainEvent> GetDomainEvents()
-    {
-        return _domainEvents.ToList();
-    }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => [.. _domainEvents];
 
     public void ClearDomainEvents()
     {
         _domainEvents.Clear();
     }
 
-    protected void RaiseDomainEvent(IDomainEvent domainEvent)
+    protected void Raise(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }

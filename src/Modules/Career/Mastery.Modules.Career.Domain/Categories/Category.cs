@@ -27,7 +27,7 @@ public sealed class Category : Aggregate<Guid>
             IsDeleted = false,
         };
 
-        category.RaiseDomainEvent(new CategoryCreatedDomainEvent(category.Id));
+        category.Raise(new CategoryCreatedDomainEvent(category.Id));
 
         return category;
     }
@@ -36,7 +36,7 @@ public sealed class Category : Aggregate<Guid>
     {
         IsDeleted = true;
 
-        RaiseDomainEvent(new CategoryDeletedDomainEvent(Id));
+        Raise(new CategoryDeletedDomainEvent(Id));
     }
 
     public void ChangeValue(string? value)
@@ -50,7 +50,7 @@ public sealed class Category : Aggregate<Guid>
 
         Value = value;
 
-        RaiseDomainEvent(new CategoryValueUpdated(Id, value));
+        Raise(new CategoryValueUpdated(Id, value));
     }
 
     public void ChangeColor(string? color)
@@ -64,6 +64,6 @@ public sealed class Category : Aggregate<Guid>
 
         Color = Color.New(color);
 
-        RaiseDomainEvent(new CategoryColorUpdated(Id, Color.Value));
+        Raise(new CategoryColorUpdatedDomainEvent(Id, Color.Value));
     }
 }

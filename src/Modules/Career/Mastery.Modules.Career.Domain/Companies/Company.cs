@@ -26,7 +26,7 @@ public sealed class Company : Aggregate<Guid>
             Note = Note.New(note),
         };
 
-        company.RaiseDomainEvent(new CompanyCreatedDomainEvent(company.Id));
+        company.Raise(new CompanyCreatedDomainEvent(company.Id));
 
         return company;
     }
@@ -37,7 +37,7 @@ public sealed class Company : Aggregate<Guid>
         {
             Title = CompanyTitle.From(title);
 
-            RaiseDomainEvent(new CompanyTitleChangedDomainEvent(Id, Title.Value));
+            Raise(new CompanyTitleChangedDomainEvent(Id, Title.Value));
         }
     }
 
@@ -49,7 +49,7 @@ public sealed class Company : Aggregate<Guid>
         {
             Category = CompanyCategory.From(category);
 
-            RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
+            Raise(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
         }
     }
 
@@ -57,13 +57,13 @@ public sealed class Company : Aggregate<Guid>
     {
         Category = CompanyCategory.Default();
 
-        RaiseDomainEvent(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
+        Raise(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
     }
 
     public void WriteNote(string? value)
     {
         Note = Note.New(value);
 
-        RaiseDomainEvent(new CompanyNoteWrittenDomainEvent(Id, Note.Value));
+        Raise(new CompanyNoteWrittenDomainEvent(Id, Note.Value));
     }
 }

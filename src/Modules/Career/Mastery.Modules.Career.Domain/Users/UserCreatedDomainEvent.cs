@@ -1,3 +1,6 @@
 ﻿namespace Mastery.Modules.Career.Domain.Users;
 
-public sealed record UserCreatedDomainEvent(Guid UserId) : IDomainEvent;
+public sealed class UserCreatedDomainEvent(Guid userId) : DomainEvent
+{
+    public Guid UserId { get; init; } = userId;
+}

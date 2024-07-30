@@ -32,7 +32,7 @@ public sealed class Job : Aggregate<Guid>
             Note = Note.New(note),
         };
 
-        job.RaiseDomainEvent(new JobCreatedDomainEvent(job.Id));
+        job.Raise(new JobCreatedDomainEvent(job.Id));
 
         return job;
     }
@@ -43,7 +43,7 @@ public sealed class Job : Aggregate<Guid>
 
         Title = title;
 
-        RaiseDomainEvent(new JobTitleChangedDomainEvent(Id, Title));
+        Raise(new JobTitleChangedDomainEvent(Id, Title));
     }
 
     public void ChangeLink(string? link)
@@ -52,14 +52,14 @@ public sealed class Job : Aggregate<Guid>
 
         Link = link;
 
-        RaiseDomainEvent(new JobLinkChangedDomainEvent(Id, Link));
+        Raise(new JobLinkChangedDomainEvent(Id, Link));
     }
 
     public void WriteNote(string? value)
     {
         Note = Note.New(value);
 
-        RaiseDomainEvent(new JobNoteWrittenDomainEvent(Id, Note.Value));
+        Raise(new JobNoteWrittenDomainEvent(Id, Note.Value));
     }
 
     public void Respond(DateOnly date)
@@ -72,7 +72,7 @@ public sealed class Job : Aggregate<Guid>
 
         _responses.Add(response);
 
-        RaiseDomainEvent(new JobRespondedDomainEvent(Id, response.Id));
+        Raise(new JobRespondedDomainEvent(Id, response.Id));
     }
 
     public void RespondScheduledResponse(Guid responseId)
@@ -87,7 +87,7 @@ public sealed class Job : Aggregate<Guid>
 
         response.Deliver();
 
-        RaiseDomainEvent(new JobRespondedDomainEvent(Id, response.Id));
+        Raise(new JobRespondedDomainEvent(Id, response.Id));
     }
 
     public void ScheduleRespond(DateOnly date)
@@ -100,6 +100,6 @@ public sealed class Job : Aggregate<Guid>
 
         _responses.Add(response);
 
-        RaiseDomainEvent(new JobRespondScheduledDomainEvent(Id, response.Id));
+        Raise(new JobRespondScheduledDomainEvent(Id, response.Id));
     }
 }

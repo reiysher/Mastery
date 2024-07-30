@@ -1,3 +1,8 @@
 ﻿namespace Mastery.Modules.Career.Domain.Jobs;
 
-public sealed record JobRespondedDomainEvent(Guid JobId, Guid ResponseId) : IDomainEvent;
+public sealed class JobRespondedDomainEvent(Guid jobId, Guid responseId) : DomainEvent
+{
+    public Guid JobId { get; init; } = jobId;
+
+    public Guid ResponseId { get; init; } = responseId;
+}

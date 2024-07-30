@@ -45,7 +45,7 @@ public sealed class CareerDbContext(
             .Select(entry => entry.Entity)
             .SelectMany(aggregate =>
             {
-                IReadOnlyList<IDomainEvent> domainEvents = aggregate.GetDomainEvents();
+                IReadOnlyCollection<IDomainEvent> domainEvents = aggregate.DomainEvents;
 
                 aggregate.ClearDomainEvents();
 

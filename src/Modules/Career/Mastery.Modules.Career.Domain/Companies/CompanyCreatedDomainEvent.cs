@@ -1,3 +1,6 @@
 ﻿namespace Mastery.Modules.Career.Domain.Companies;
 
-public sealed record CompanyCreatedDomainEvent(Guid CompanyId) : IDomainEvent;
+public sealed class CompanyCreatedDomainEvent(Guid companyId) : DomainEvent
+{
+    public Guid CompanyId { get; init; } = companyId;
+}

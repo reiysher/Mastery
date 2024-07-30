@@ -19,7 +19,7 @@ public sealed class User : Aggregate<Guid>
             Email = Email.Create(email),
         };
 
-        user.RaiseDomainEvent(new UserCreatedDomainEvent(user.Id));
+        user.Raise(new UserCreatedDomainEvent(user.Id));
 
         return user;
     }

@@ -1,3 +1,10 @@
-﻿namespace Mastery.Modules.Career.Domain.Companies;
+﻿using System.ComponentModel.Design;
 
-public sealed record CompanyTitleChangedDomainEvent(Guid CompanyId, string NewTitle) : IDomainEvent;
+namespace Mastery.Modules.Career.Domain.Companies;
+
+public sealed class CompanyTitleChangedDomainEvent(Guid companyId, string newTitle) : DomainEvent
+{
+    public Guid CompanyId { get; init; } = companyId;
+
+    public string NewTitle { get; init; } = newTitle;
+}
