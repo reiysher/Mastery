@@ -1,5 +1,10 @@
 <Solution>
-  <Folder Name="/src/Modules/Career/" />
+  <Folder Name="/src/Modules/Career/">
+    <Project Path="src\Modules\Mastery.Modules.Career.Application\Mastery.Modules.Career.Application.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Mastery.Modules.Career.Domain\Mastery.Modules.Career.Domain.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Mastery.Modules.Career.Infrastructure\Mastery.Modules.Career.Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Mastery.Modules.Career.Presentation\Mastery.Modules.Career.Presentation.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/src/Modules/" />
   <Folder Name="/src/API/">
     <Project Path="src\API\Mastery.Api\Mastery.Api.csproj" />
