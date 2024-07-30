@@ -2,7 +2,7 @@
   <Folder Name="/src/Modules/Career/" />
   <Folder Name="/src/Modules/" />
   <Folder Name="/src/API/">
-    <Project Path="src\API\Mastery.Api\Mastery.Api.csproj" Type="Classic C#" />
+    <Project Path="src\API\Mastery.Api\Mastery.Api.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src\Mastery.Career.Api\Mastery.Career.Api.csproj" />
@@ -14,4 +14,5 @@
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
   </Folder>
+  <Project Path="docker-compose.dcproj" Type="{E53339B2-1760-4266-BCC7-CA923CBCF16C}" />
 </Solution>

@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  mastery.api:
+    image: ${DOCKER_REGISTRY-}masteryapi
+    container_name: Mastery.Api
+    build:
+      context: .
+      dockerfile: src/API/Mastery.Api/Dockerfile
+    ports:
+      - 8000:8080
+      - 8001:8081
+
+  mastery.database:
+    image: postgres:latest
+    container_name: Mastery.Database
+    environment:
+      - POSTGRES_DB=mastery
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
