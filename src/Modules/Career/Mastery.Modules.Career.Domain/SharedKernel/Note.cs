@@ -9,9 +9,12 @@ public sealed record Note
         Value = value;
     }
 
-    public static Note New(string? value)
+    public static Result<Note> New(string? value)
     {
-        ArgumentNullException.ThrowIfNull(value);
+        if(value == null)
+        {
+            return Result.Failure<Note>(NoteErrors.InvalidValue);
+        }
 
         return new Note(value);
     }

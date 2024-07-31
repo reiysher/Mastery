@@ -9,9 +9,12 @@ public sealed record CompanyTitle
         Value = value;
     }
 
-    public static CompanyTitle From(string? value)
+    public static Result<CompanyTitle> From(string? value)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return Result.Failure<CompanyTitle>(CompanyErrors.InvalidTitle);
+        }
 
         return new CompanyTitle(value.Trim());
     }

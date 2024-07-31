@@ -1,4 +1,5 @@
 ﻿using Mastery.Modules.Career.Domain.Categories;
+using Mastery.Modules.Career.Domain.SharedKernel;
 
 namespace Mastery.Modules.Career.Domain.Companies;
 
@@ -16,14 +17,26 @@ public sealed class Company : Aggregate<Guid>
 
     private Company() { }
 
-    public static Company Create(Guid id, string? title, string? note = "", Category? category = null)
+    public static Result<Company> Create(Guid id, string? title, string? note = "", Category? category = null)
     {
+        Result<CompanyTitle> companyTitleResult = CompanyTitle.From(title);
+        if (companyTitleResult.IsFailure)
+        {
+            return Result.Failure<Company>(companyTitleResult.Error);
+        }
+
+        Result<Note> noteResult = Note.New(note);
+        if (noteResult.IsFailure)
+        {
+            return Result.Failure<Company>(noteResult.Error);
+        }
+
         var company = new Company
         {
             Id = id,
-            Title = CompanyTitle.From(title),
+            Title = companyTitleResult.Value,
             Category = CompanyCategory.From(category),
-            Note = Note.New(note),
+            Note = noteResult.Value,
         };
 
         company.Raise(new CompanyCreatedDomainEvent(company.Id));
@@ -31,19 +44,28 @@ public sealed class Company : Aggregate<Guid>
         return company;
     }
 
-    public void ChangeTitle(string? title)
+    public Result ChangeTitle(string? title)
     {
         if (!string.IsNullOrWhiteSpace(title) && title != Title.Value)
         {
-            Title = CompanyTitle.From(title);
+            Result<CompanyTitle> companyTitleResult = CompanyTitle.From(title);
+            if (companyTitleResult.IsFailure)
+            {
+                return Result.Failure<Company>(companyTitleResult.Error);
+            }
 
             Raise(new CompanyTitleChangedDomainEvent(Id, Title.Value));
         }
+
+        return Result.Success();
     }
 
-    public void ChangeCategory(Category? category)
+    public Result ChangeCategory(Category? category)
     {
-        ArgumentNullException.ThrowIfNull(category);
+        if (category is null)
+        {
+            return Result.Failure(CompanyErrors.InvalidCategory);
+        }
 
         if (category.Id != Category?.Id)
         {
@@ -51,6 +73,8 @@ public sealed class Company : Aggregate<Guid>
 
             Raise(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
         }
+
+        return Result.Success();
     }
 
     public void ResetCategory()
@@ -59,11 +83,19 @@ public sealed class Company : Aggregate<Guid>
 
         Raise(new CompanyCategoryChangedDomainEvent(Id, Category?.Id));
     }
-
-    public void WriteNote(string? value)
+    public Result WriteNote(string? value)
     {
-        Note = Note.New(value);
+
+        Result<Note> noteResult = Note.New(value);
+        if (noteResult.IsFailure)
+        {
+            return Result.Failure(noteResult.Error);
+        }
+
+        Note = noteResult.Value;
 
         Raise(new CompanyNoteWrittenDomainEvent(Id, Note.Value));
+
+        return Result.Success();
     }
 }
