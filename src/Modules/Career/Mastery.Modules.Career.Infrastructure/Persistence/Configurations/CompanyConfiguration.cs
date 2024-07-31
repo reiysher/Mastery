@@ -15,7 +15,7 @@ internal sealed class CompanyConfiguration : IEntityTypeConfiguration<Company>
 
         builder.Property(company => company.Title)
             .HasMaxLength(255)
-            .HasConversion(title => title.Value, value => CompanyTitle.From(value));
+            .HasConversion(title => title.Value, value => CompanyTitle.From(value).Value);
 
         builder.OwnsOne(company => company.Category);
 
@@ -26,7 +26,7 @@ internal sealed class CompanyConfiguration : IEntityTypeConfiguration<Company>
 
         builder.Property(company => company.Note)
             .HasMaxLength(2048)
-            .HasConversion(note => note!.Value, value => Note.New(value));
+            .HasConversion(note => note!.Value, value => Note.New(value).Value);
 
         builder.Property<uint>("Version").IsRowVersion();
     }

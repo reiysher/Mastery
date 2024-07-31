@@ -26,11 +26,18 @@ internal sealed class CreateCompanyCommandHandler(
             }
         }
 
-        var company = Company.Create(
+        Result<Company> companyResult = Company.Create(
             Guid.NewGuid(),
             command.Title,
             command.Note,
             category);
+
+        if (companyResult.IsFailure)
+        {
+            return Result.Failure<Guid>(companyResult.Error);
+        }
+
+        Company company = companyResult.Value;
 
         companyRepository.Insert(company);
 

@@ -13,7 +13,14 @@ internal sealed class RegisterUserCommandHandler(
 {
     public async Task<Result<Guid>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
     {
-        var user = User.Create(command.FirstName, command.LastName, command.Email);
+        Result<User> userResult = User.Create(command.FirstName, command.LastName, command.Email);
+
+        if (userResult.IsFailure)
+        {
+            return Result.Failure<Guid>(userResult.Error);
+        }
+
+        User user = userResult.Value;
 
         string identityId = await authenticationService.RegisterAsync(
             user,

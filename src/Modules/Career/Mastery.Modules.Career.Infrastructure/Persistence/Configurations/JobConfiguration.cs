@@ -16,7 +16,7 @@ internal sealed class JobConfiguration : IEntityTypeConfiguration<Job>
 
         builder.Property(job => job.Note)
             .HasMaxLength(2048)
-            .HasConversion(note => note!.Value, value => Note.New(value));
+            .HasConversion(note => note!.Value, value => Note.New(value).Value);
 
         builder.HasOne<Company>()
             .WithMany()

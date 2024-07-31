@@ -21,12 +21,19 @@ internal sealed class CreateJobCommandHandler(
             return Result.Failure<Guid>(CompanyErrors.NotFound);
         }
 
-        var job = Job.Create(
+        Result<Job> jobResult = Job.Create(
             company,
             Guid.NewGuid(),
             command.Title,
             command.Link,
             command.Note);
+
+        if (jobResult.IsFailure)
+        {
+            return Result.Failure<Guid>(jobResult.Error);
+        }
+
+        Job job = jobResult.Value;
 
         jobRepository.Insert(job);
 
