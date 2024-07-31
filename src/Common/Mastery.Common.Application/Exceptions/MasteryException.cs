@@ -4,7 +4,7 @@ namespace Mastery.Common.Application.Exceptions;
 
 public sealed class MasteryException : Exception
 {
-    public MasteryException(string requestName, Error? error, Exception? innerException = default)
+    public MasteryException(string requestName, Error? error = null, Exception? innerException = default)
         : base("Application Exception", innerException)
     {
         RequestName = requestName;

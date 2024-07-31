@@ -1,5 +1,6 @@
 ﻿using Mastery.Modules.Career.Presentation.Endpoints;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace Mastery.Modules.Career.Presentation;
 
@@ -9,6 +10,7 @@ public static class DependencyInjection
     {
         app.MapGroup("api/categories")
             .MapCategoryEndpoints()
+            .WithTags("Categories")
             .WithOpenApi();
 
         app.MapGroup("api/companies")

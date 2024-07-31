@@ -1,9 +1,13 @@
+using Mastery.Api.Middleware;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, loggerConfiguration) =>
     loggerConfiguration.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Configuration.AddModuleConfiguration(["career"]);
 
@@ -29,5 +33,7 @@ if (app.Environment.IsDevelopment())
 app.MapCareerModuleEndpoints();
 
 app.UseSerilogRequestLogging();
+
+app.UseExceptionHandler();
 
 await app.RunAsync();
