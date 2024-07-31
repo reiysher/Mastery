@@ -12,11 +12,18 @@ internal sealed class CreateCotegoryCommandHandler(
 {
     public async Task<Result<Guid>> Handle(CreateCotegoryCommand command, CancellationToken cancellationToken)
     {
-        var category = Category.Create(
+        Result<Category> result = Category.Create(
             Guid.NewGuid(),
             command.Value,
             command.Color,
             command.Description);
+
+        if (result.IsFailure)
+        {
+            return Result.Failure<Guid>(result.Error);
+        }
+
+        Category category = result.Value;
 
         categoryRepository.Insert(category);
 
