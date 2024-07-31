@@ -1,4 +1,5 @@
 ﻿using Mastery.Modules.Career.Domain.Companies;
+using Mastery.Modules.Career.Domain.SharedKernel;
 
 namespace Mastery.Modules.Career.Domain.Jobs;
 
@@ -18,10 +19,23 @@ public sealed class Job : Aggregate<Guid>
 
     private Job() { }
 
-    public static Job Create(Company company, Guid id, string? title, string? link, string? note = "")
+    public static Result<Job> Create(Company company, Guid id, string? title, string? link, string? note = "")
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(title);
-        ArgumentException.ThrowIfNullOrWhiteSpace(link);
+        Result<Note> noteResult = Note.New(note);
+        if (noteResult.IsFailure)
+        {
+            return Result.Failure<Job>(noteResult.Error);
+        }
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return Result.Failure<Job>(JobErrors.InvalidTitle);
+        }
+
+        if (string.IsNullOrWhiteSpace(link))
+        {
+            return Result.Failure<Job>(JobErrors.InvalidLink);
+        }
 
         var job = new Job
         {
@@ -29,7 +43,7 @@ public sealed class Job : Aggregate<Guid>
             CompanyId = company.Id,
             Title = title,
             Link = link,
-            Note = Note.New(note),
+            Note = noteResult.Value,
         };
 
         job.Raise(new JobCreatedDomainEvent(job.Id));
@@ -37,32 +51,50 @@ public sealed class Job : Aggregate<Guid>
         return job;
     }
 
-    public void ChangeTitle(string? title)
+    public Result ChangeTitle(string? title)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(title);
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return Result.Failure(JobErrors.InvalidTitle);
+        }
 
         Title = title;
 
         Raise(new JobTitleChangedDomainEvent(Id, Title));
+
+        return Result.Success();
     }
 
-    public void ChangeLink(string? link)
+    public Result ChangeLink(string? link)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(link);
+        if (string.IsNullOrWhiteSpace(link))
+        {
+            return Result.Failure<Job>(JobErrors.InvalidLink);
+        }
 
         Link = link;
 
         Raise(new JobLinkChangedDomainEvent(Id, Link));
+
+        return Result.Success();
     }
 
-    public void WriteNote(string? value)
+    public Result WriteNote(string? value)
     {
-        Note = Note.New(value);
+        Result<Note> noteResult = Note.New(value);
+        if (noteResult.IsFailure)
+        {
+            return Result.Failure(noteResult.Error);
+        }
+
+        Note = noteResult.Value;
 
         Raise(new JobNoteWrittenDomainEvent(Id, Note.Value));
+
+        return Result.Success();
     }
 
-    public void Respond(DateOnly date)
+    public Result Respond(DateOnly date)
     {
         var response = JobResponse.Create(
             Guid.NewGuid(),
@@ -73,24 +105,28 @@ public sealed class Job : Aggregate<Guid>
         _responses.Add(response);
 
         Raise(new JobRespondedDomainEvent(Id, response.Id));
+
+        return Result.Success();
     }
 
-    public void RespondScheduledResponse(Guid responseId)
+    public Result RespondScheduledResponse(Guid responseId)
     {
         JobResponse? response = _responses
             .FirstOrDefault(r => r.Id == responseId);
 
         if (response is null)
         {
-            throw new InvalidOperationException();
+            return Result.Failure(JobErrors.ResponseNotFound);
         }
 
         response.Deliver();
 
         Raise(new JobRespondedDomainEvent(Id, response.Id));
+
+        return Result.Success();
     }
 
-    public void ScheduleRespond(DateOnly date)
+    public Result ScheduleRespond(DateOnly date)
     {
         var response = JobResponse.Create(
             Guid.NewGuid(),
@@ -101,5 +137,7 @@ public sealed class Job : Aggregate<Guid>
         _responses.Add(response);
 
         Raise(new JobRespondScheduledDomainEvent(Id, response.Id));
+
+        return Result.Success();
     }
 }
