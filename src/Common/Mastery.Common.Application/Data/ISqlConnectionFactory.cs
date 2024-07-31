@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Mastery.Modules.Career.Application.Abstractions.Data;
+namespace Mastery.Common.Application.Data;
 
 public interface ISqlConnectionFactory
 {

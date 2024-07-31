@@ -1,6 +1,6 @@
-﻿using Mastery.Modules.Career.Application.Abstractions.Data;
-using Mastery.Modules.Career.Application.Exceptions;
-using Mastery.Modules.Career.Domain.Abstractions;
+﻿using Mastery.Common.Application.Exceptions;
+using Mastery.Common.Domain;
+using Mastery.Modules.Career.Application.Abstractions.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

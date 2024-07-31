@@ -1,4 +1,4 @@
-﻿namespace Mastery.Modules.Career.Domain.Abstractions;
+﻿namespace Mastery.Common.Domain;
 
 public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot
     where TId : notnull

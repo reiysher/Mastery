@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Mastery.Modules.Career.Domain.Abstractions;
+namespace Mastery.Common.Domain;
 
 public class Result
 {

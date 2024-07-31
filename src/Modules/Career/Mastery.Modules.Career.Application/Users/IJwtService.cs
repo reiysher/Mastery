@@ -1,4 +1,4 @@
-﻿using Mastery.Modules.Career.Domain.Abstractions;
+﻿using Mastery.Common.Domain;
 
 namespace Mastery.Modules.Career.Application.Users;
 

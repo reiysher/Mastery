@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using Dapper;
-using Mastery.Modules.Career.Application.Abstractions.Data;
-using Mastery.Modules.Career.Application.Abstractions.Messaging;
-using Mastery.Modules.Career.Domain.Abstractions;
+using Mastery.Common.Application.Data;
+using Mastery.Common.Application.Messaging;
+using Mastery.Common.Domain;
 
 namespace Mastery.Modules.Career.Application.Categories.GetAll;
 

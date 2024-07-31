@@ -1,4 +1,4 @@
-﻿namespace Mastery.Modules.Career.Domain.Abstractions;
+﻿namespace Mastery.Common.Domain;
 
 public sealed record Error(string Code, string Name)
 {

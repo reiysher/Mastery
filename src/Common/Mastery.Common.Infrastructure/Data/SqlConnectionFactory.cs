@@ -1,8 +1,8 @@
-﻿using Mastery.Modules.Career.Application.Abstractions.Data;
+﻿using Mastery.Common.Application.Data;
 using Npgsql;
 using System.Data;
 
-namespace Mastery.Modules.Career.Infrastructure.Persistence;
+namespace Mastery.Common.Infrastructure.Data;
 
 internal sealed class SqlConnectionFactory(NpgsqlDataSource dataSource) : ISqlConnectionFactory
 {

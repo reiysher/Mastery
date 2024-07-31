@@ -1,12 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	
 	<ItemGroup>
-	  <PackageReference Include="Dapper" Version="2.1.35" />
-	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
-	  <PackageReference Include="MediatR" Version="12.4.0" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\Mastery.Common.Application\Mastery.Common.Application.csproj" />
 		<ProjectReference Include="..\Mastery.Modules.Career.Domain\Mastery.Modules.Career.Domain.csproj" />
 	</ItemGroup>
 

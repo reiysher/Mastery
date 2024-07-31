@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 
-namespace Mastery.Modules.Career.Infrastructure.Persistence;
+namespace Mastery.Common.Infrastructure.Data;
 
 internal sealed class DateOnlyTypeHandler : SqlMapper.TypeHandler<DateOnly>
 {

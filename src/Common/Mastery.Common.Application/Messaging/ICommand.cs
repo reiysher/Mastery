@@ -1,7 +1,7 @@
-﻿using Mastery.Modules.Career.Domain.Abstractions;
+﻿using Mastery.Common.Domain;
 using MediatR;
 
-namespace Mastery.Modules.Career.Application.Abstractions.Messaging;
+namespace Mastery.Common.Application.Messaging;
 
 public interface ICommand : IRequest<Result>, IBaseCommand;
 

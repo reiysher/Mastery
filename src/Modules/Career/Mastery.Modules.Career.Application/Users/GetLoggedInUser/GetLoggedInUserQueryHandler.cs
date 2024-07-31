@@ -1,5 +1,5 @@
-﻿using Mastery.Modules.Career.Application.Abstractions.Messaging;
-using Mastery.Modules.Career.Domain.Abstractions;
+﻿using Mastery.Common.Application.Messaging;
+using Mastery.Common.Domain;
 
 namespace Mastery.Modules.Career.Application.Users.GetLoggedInUser;
 

@@ -1,6 +1,6 @@
-﻿using Mastery.Modules.Career.Application.Abstractions.Data;
-using Mastery.Modules.Career.Application.Abstractions.Messaging;
-using Mastery.Modules.Career.Domain.Abstractions;
+﻿using Mastery.Common.Application.Messaging;
+using Mastery.Common.Domain;
+using Mastery.Modules.Career.Application.Abstractions.Data;
 using Mastery.Modules.Career.Domain.Jobs;
 
 namespace Mastery.Modules.Career.Application.Jobs.ChangeLink;

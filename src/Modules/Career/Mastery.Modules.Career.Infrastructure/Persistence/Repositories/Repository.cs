@@ -1,4 +1,4 @@
-﻿using Mastery.Modules.Career.Domain.Abstractions;
+﻿using Mastery.Common.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;

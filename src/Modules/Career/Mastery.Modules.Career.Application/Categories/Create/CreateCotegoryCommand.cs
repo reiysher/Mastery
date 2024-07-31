@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Mastery.Modules.Career.Application.Abstractions.Messaging;
+using Mastery.Common.Application.Messaging;
 
 namespace Mastery.Modules.Career.Application.Categories.Create;
 

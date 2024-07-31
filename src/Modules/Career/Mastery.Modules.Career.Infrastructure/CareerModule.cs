@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
 using FluentValidation;
+using Mastery.Common.Application.Data;
 
 namespace Mastery.Modules.Career.Infrastructure;
 
@@ -25,12 +26,6 @@ public static class CareerModule
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddMediatR(options =>
-        {
-            options.RegisterServicesFromAssembly(Application.AssemblyReference.Assembly);
-        });
-
-        services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
 
         services.AddInfrastructure(configuration);
 
@@ -44,11 +39,6 @@ public static class CareerModule
     {
 
         string connectionString = configuration.GetConnectionString("Database") ?? throw new ArgumentNullException(nameof(configuration));
-
-        NpgsqlDataSource npgsqlDataSource = new NpgsqlDataSourceBuilder(connectionString).Build();
-        services.TryAddSingleton(npgsqlDataSource);
-
-        services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
 
         services.AddDbContext<CareerDbContext>(options =>
         {
@@ -67,8 +57,6 @@ public static class CareerModule
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CareerDbContext>());
-
-        SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
 
         return services;
     }

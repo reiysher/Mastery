@@ -1,5 +1,5 @@
-﻿using Mastery.Modules.Career.Application.Users;
-using Mastery.Modules.Career.Domain.Abstractions;
+﻿using Mastery.Common.Domain;
+using Mastery.Modules.Career.Application.Users;
 
 namespace Mastery.Modules.Career.Infrastructure.Authentication;
 
