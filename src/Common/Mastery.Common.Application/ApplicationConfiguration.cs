@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using FluentValidation;
+using Mastery.Common.Application.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mastery.Common.Application;
@@ -12,6 +13,8 @@ public static class ApplicationConfiguration
         services.AddMediatR(options =>
         {
             options.RegisterServicesFromAssemblies(moduleAssemblies);
+
+            options.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
         });
 
         services.AddValidatorsFromAssemblies(moduleAssemblies, includeInternalTypes: true);

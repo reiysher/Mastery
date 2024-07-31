@@ -1,4 +1,9 @@
+using Serilog;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, loggerConfiguration) =>
+    loggerConfiguration.ReadFrom.Configuration(context.Configuration));
 
 builder.Configuration.AddModuleConfiguration(["career"]);
 
@@ -22,5 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapCareerModuleEndpoints();
+
+app.UseSerilogRequestLogging();
 
 await app.RunAsync();
