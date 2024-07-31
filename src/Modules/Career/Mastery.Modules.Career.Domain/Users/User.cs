@@ -10,12 +10,18 @@ public sealed class User : Aggregate<Guid>
 
     private User() { }
 
-    public static User Create(string firstName, string lastName, string email)
+    public static Result<User> Create(string firstName, string lastName, string email)
     {
+        Result<FullName> fullNameResult = FullName.From(firstName, lastName);
+        if (fullNameResult.IsFailure)
+        {
+            return Result.Failure<User>(fullNameResult.Error);
+        }
+
         var user = new User
         {
             Id = Guid.NewGuid(),
-            Name = FullName.From(firstName, lastName),
+            Name = fullNameResult.Value,
             Email = Email.Create(email),
         };
 
@@ -24,8 +30,10 @@ public sealed class User : Aggregate<Guid>
         return user;
     }
 
-    public void SetIdentityId(string identityId)
+    public Result SetIdentityId(string identityId)
     {
         IdentityId = identityId;
+
+        return Result.Success();
     }
 }

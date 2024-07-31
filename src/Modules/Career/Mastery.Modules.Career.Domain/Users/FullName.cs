@@ -8,10 +8,17 @@ public sealed record FullName
 
     private FullName() { }
 
-    public static FullName From(string firstName, string lastName)
+    public static Result<FullName> From(string firstName, string lastName)
     {
-        ArgumentException.ThrowIfNullOrEmpty(firstName);
-        ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
+        if (string.IsNullOrWhiteSpace(firstName))
+        {
+            return Result.Failure<FullName>(UserErrors.InvalidFirstName);
+        }
+
+        if (string.IsNullOrWhiteSpace(lastName))
+        {
+            return Result.Failure<FullName>(UserErrors.InvalidLastName);
+        }
 
         return new FullName
         {
