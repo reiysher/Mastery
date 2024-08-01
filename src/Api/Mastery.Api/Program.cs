@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Mastery.Api.Middleware;
+using Mastery.Common.Presentation.Endpoints;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -37,7 +38,7 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
-app.MapCareerModuleEndpoints();
+app.MapEndpoints();
 
 app.MapHealthChecks("health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
 {

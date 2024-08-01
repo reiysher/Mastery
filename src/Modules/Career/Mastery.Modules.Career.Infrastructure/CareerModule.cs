@@ -1,4 +1,4 @@
-﻿using Dapper;
+﻿using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Career.Application.Abstractions.Data;
 using Mastery.Modules.Career.Application.Users;
 using Mastery.Modules.Career.Domain.Categories;
@@ -8,15 +8,9 @@ using Mastery.Modules.Career.Domain.Users;
 using Mastery.Modules.Career.Infrastructure.Authentication;
 using Mastery.Modules.Career.Infrastructure.Persistence;
 using Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
-using Mastery.Modules.Career.Presentation;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Npgsql;
-using FluentValidation;
-using Mastery.Common.Application.Data;
 
 namespace Mastery.Modules.Career.Infrastructure;
 
@@ -26,6 +20,7 @@ public static class CareerModule
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.AddEndpoints(Presentation.AssemblyReference.Assembly);
 
         services.AddInfrastructure(configuration);
 
@@ -59,12 +54,5 @@ public static class CareerModule
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CareerDbContext>());
 
         return services;
-    }
-
-    public static IApplicationBuilder MapCareerModuleEndpoints(this WebApplication app)
-    {
-        app.MapEndpoints();
-
-        return app;
     }
 }

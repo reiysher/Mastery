@@ -1,17 +1,18 @@
 ﻿using Mastery.Common.Domain;
+using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Career.Application.Categories.Create;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Mastery.Modules.Career.Presentation.Endpoints;
+namespace Mastery.Modules.Career.Presentation.Categories;
 
-public static class CategoryEndpoints
+internal sealed class CreateCategory : IEndpoint
 {
-    public static RouteGroupBuilder MapCategoryEndpoints(this RouteGroupBuilder group)
+    public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        group.MapPost("", async (
+        app.MapPost("api/categories", async (
             CreateCotegoryRequest request,
             ISender sender,
             CancellationToken cancellationToken) =>
@@ -23,9 +24,9 @@ public static class CategoryEndpoints
             Result<Guid> result = await sender.Send(command, cancellationToken);
 
             return Results.Ok(result.Value);
-        });
-
-        return group;
+        })
+            .WithTags("Categories")
+            .WithOpenApi();
     }
 }
 
