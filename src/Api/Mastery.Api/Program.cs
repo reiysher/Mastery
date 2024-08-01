@@ -1,3 +1,4 @@
+using HealthChecks.UI.Client;
 using Mastery.Api.Middleware;
 using Serilog;
 
@@ -20,6 +21,10 @@ builder.Services.AddInfrastructure(
     builder.Configuration.GetConnectionString("Database")!,
     builder.Configuration.GetConnectionString("Cache")!);
 
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Cache")!);
+
 builder.Services.AddCareerModule(builder.Configuration);
 
 WebApplication app = builder.Build();
@@ -33,6 +38,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapCareerModuleEndpoints();
+
+app.MapHealthChecks("health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.UseSerilogRequestLogging();
 
