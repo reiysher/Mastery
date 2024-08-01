@@ -16,7 +16,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication([Mastery.Modules.Career.Application.AssemblyReference.Assembly]);
 
-builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("Database")!);
+builder.Services.AddInfrastructure(
+    builder.Configuration.GetConnectionString("Database")!,
+    builder.Configuration.GetConnectionString("Cache")!);
 
 builder.Services.AddCareerModule(builder.Configuration);
 
