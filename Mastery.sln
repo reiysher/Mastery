@@ -32,9 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7D867A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Common.Application", "src\Common\Mastery.Common.Application\Mastery.Common.Application.csproj", "{049F644D-A9D4-4749-A267-69A69C2988EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastery.Common.Domain", "src\Common\Mastery.Common.Domain\Mastery.Common.Domain.csproj", "{67A3761F-EC28-4EDF-AFB3-C2C92D804D79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Common.Domain", "src\Common\Mastery.Common.Domain\Mastery.Common.Domain.csproj", "{67A3761F-EC28-4EDF-AFB3-C2C92D804D79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastery.Common.Infrastructure", "src\Common\Mastery.Common.Infrastructure\Mastery.Common.Infrastructure.csproj", "{10DB78AB-2A56-49E5-B6D2-107CE1EEA38A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Common.Infrastructure", "src\Common\Mastery.Common.Infrastructure\Mastery.Common.Infrastructure.csproj", "{10DB78AB-2A56-49E5-B6D2-107CE1EEA38A}"
 EndProject
 Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
