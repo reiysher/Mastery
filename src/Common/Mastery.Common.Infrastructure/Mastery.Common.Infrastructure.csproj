@@ -12,4 +12,8 @@
 		<ProjectReference Include="..\Mastery.Common.Application\Mastery.Common.Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Outbox\" />
+	</ItemGroup>
+
 </Project>
