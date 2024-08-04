@@ -1,7 +1,7 @@
 ﻿using Mastery.Common.Domain;
-using Mastery.Modules.Career.Application.Users;
+using Mastery.Modules.Identity.Application.Users;
 
-namespace Mastery.Modules.Career.Infrastructure.Authentication;
+namespace Mastery.Modules.Identity.Infrastructure.Authentication;
 
 internal sealed class JwtService : IJwtService
 {

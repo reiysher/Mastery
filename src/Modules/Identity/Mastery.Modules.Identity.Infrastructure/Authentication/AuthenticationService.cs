@@ -1,7 +1,7 @@
-﻿using Mastery.Modules.Career.Application.Users;
-using Mastery.Modules.Career.Domain.Users;
+﻿using Mastery.Modules.Identity.Application.Users;
+using Mastery.Modules.Identity.Domain.Users;
 
-namespace Mastery.Modules.Career.Infrastructure.Authentication;
+namespace Mastery.Modules.Identity.Infrastructure.Authentication;
 
 internal sealed class AuthenticationService : IAuthenticationService
 {

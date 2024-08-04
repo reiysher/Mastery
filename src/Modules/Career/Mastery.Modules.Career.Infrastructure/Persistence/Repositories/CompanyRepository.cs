@@ -1,4 +1,5 @@
-﻿using Mastery.Modules.Career.Domain.Companies;
+﻿using Mastery.Common.Infrastructure.Repositories;
+using Mastery.Modules.Career.Domain.Companies;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;

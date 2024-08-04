@@ -1,13 +1,11 @@
 ﻿using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Career.Application.Abstractions.Data;
-using Mastery.Modules.Career.Application.Users;
 using Mastery.Modules.Career.Domain.Categories;
 using Mastery.Modules.Career.Domain.Companies;
 using Mastery.Modules.Career.Domain.Jobs;
-using Mastery.Modules.Career.Domain.Users;
-using Mastery.Modules.Career.Infrastructure.Authentication;
 using Mastery.Modules.Career.Infrastructure.Persistence;
 using Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
+using Mastery.Modules.Career.Presentation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,12 +18,9 @@ public static class CareerModule
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddEndpoints(Presentation.AssemblyReference.Assembly);
+        services.AddEndpoints(AssemblyReference.Assembly);
 
         services.AddInfrastructure(configuration);
-
-        services.AddScoped<IAuthenticationService, AuthenticationService>();
-        services.AddScoped<IJwtService, JwtService>();
 
         return services;
     }
@@ -49,7 +44,6 @@ public static class CareerModule
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
         services.AddScoped<IJobRepository, JobRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CareerDbContext>());
 

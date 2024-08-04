@@ -1,8 +1,8 @@
-﻿using Mastery.Modules.Career.Domain.Users;
+﻿using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Mastery.Modules.Career.Infrastructure.Persistence.Configurations;
+namespace Mastery.Modules.Identity.Infrastructure.Persistence.Configurations;
 
 internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {

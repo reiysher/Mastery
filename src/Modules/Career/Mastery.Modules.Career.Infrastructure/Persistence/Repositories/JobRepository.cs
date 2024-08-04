@@ -1,4 +1,5 @@
-﻿using Mastery.Modules.Career.Domain.Jobs;
+﻿using Mastery.Common.Infrastructure.Repositories;
+using Mastery.Modules.Career.Domain.Jobs;
 
 namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
 

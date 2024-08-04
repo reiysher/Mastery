@@ -1,6 +1,6 @@
-﻿using Mastery.Modules.Career.Domain.Users;
+﻿using Mastery.Modules.Identity.Domain.Users;
 
-namespace Mastery.Modules.Career.Application.Users;
+namespace Mastery.Modules.Identity.Application.Users;
 
 public interface IAuthenticationService
 {

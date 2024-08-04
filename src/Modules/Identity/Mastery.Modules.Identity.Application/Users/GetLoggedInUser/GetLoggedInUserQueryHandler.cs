@@ -1,7 +1,7 @@
 ﻿using Mastery.Common.Application.Messaging;
 using Mastery.Common.Domain;
 
-namespace Mastery.Modules.Career.Application.Users.GetLoggedInUser;
+namespace Mastery.Modules.Identity.Application.Users.GetLoggedInUser;
 
 internal sealed class GetLoggedInUserQueryHandler : IQueryHandler<GetLoggedInUserQuery, UserResponse>
 {

@@ -1,8 +1,8 @@
 ﻿using Mastery.Common.Application.Messaging;
 using Mastery.Common.Domain;
-using Mastery.Modules.Career.Domain.Users;
+using Mastery.Modules.Identity.Domain.Users;
 
-namespace Mastery.Modules.Career.Application.Users.LogIn;
+namespace Mastery.Modules.Identity.Application.Users.LogIn;
 
 internal sealed class LogInUserCommandHandler(IJwtService jwtService)
     : ICommandHandler<LogInUserCommand, AccessTokenResponse>

@@ -1,6 +1,6 @@
 ﻿using Mastery.Common.Application.Messaging;
 
-namespace Mastery.Modules.Career.Application.Users.Register;
+namespace Mastery.Modules.Identity.Application.Users.Register;
 
 public sealed record RegisterUserCommand(
     string Email,

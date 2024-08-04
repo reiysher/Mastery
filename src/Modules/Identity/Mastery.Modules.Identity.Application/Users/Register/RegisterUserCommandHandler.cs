@@ -1,9 +1,9 @@
 ﻿using Mastery.Common.Application.Messaging;
 using Mastery.Common.Domain;
-using Mastery.Modules.Career.Application.Abstractions.Data;
-using Mastery.Modules.Career.Domain.Users;
+using Mastery.Modules.Identity.Application.Abstractions.Data;
+using Mastery.Modules.Identity.Domain.Users;
 
-namespace Mastery.Modules.Career.Application.Users.Register;
+namespace Mastery.Modules.Identity.Application.Users.Register;
 
 internal sealed class RegisterUserCommandHandler(
     IAuthenticationService authenticationService,

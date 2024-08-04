@@ -1,4 +1,4 @@
-﻿namespace Mastery.Modules.Career.Application.Users.GetLoggedInUser;
+﻿namespace Mastery.Modules.Identity.Application.Users.GetLoggedInUser;
 
 public sealed class UserResponse
 {

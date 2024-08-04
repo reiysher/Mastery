@@ -1,13 +1,13 @@
 ﻿using Mastery.Common.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mastery.Modules.Career.Infrastructure.Persistence.Repositories;
+namespace Mastery.Common.Infrastructure.Repositories;
 
-internal abstract class Repository<TAggregate, TId>(CareerDbContext dbContext)
+public abstract class Repository<TAggregate, TId>(DbContext dbContext)
     where TAggregate : Aggregate<TId>
     where TId : notnull
 {
-    protected readonly CareerDbContext DbContext = dbContext;
+    protected readonly DbContext DbContext = dbContext;
 
     public async Task<TAggregate?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
     {

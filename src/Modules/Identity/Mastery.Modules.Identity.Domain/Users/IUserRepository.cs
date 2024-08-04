@@ -1,4 +1,4 @@
-﻿namespace Mastery.Modules.Career.Domain.Users;
+﻿namespace Mastery.Modules.Identity.Domain.Users;
 
 public interface IUserRepository
 {
