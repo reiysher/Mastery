@@ -40,7 +40,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Modules\Career\Mastery.Modules.Career.Infrastructure\Mastery.Modules.Career.Infrastructure.csproj" />
-		<ProjectReference Include="..\..\Modules\Identity\Mastery.Modules.Identity.Infrastructure\Mastery.Modules.Identity.Infrastructure.csproj" />
+		<ProjectReference Include="..\..\Modules\Identity\Mastery.Modules.Users.Infrastructure\Mastery.Modules.Users.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

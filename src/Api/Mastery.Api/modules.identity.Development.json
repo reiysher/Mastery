@@ -1,8 +1,0 @@
-﻿{
-  "IdentityModule": {
-    "Database": {
-      "ConnectionString": "",
-      "MigrationsHistoryTable": "ef_migrations_history"
-    }
-  }
-}

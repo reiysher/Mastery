@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Mastery.Common.Infrastructure\Mastery.Common.Infrastructure.csproj" />
-    <ProjectReference Include="..\Mastery.Modules.Identity.Application\Mastery.Modules.Identity.Application.csproj" />
-    <ProjectReference Include="..\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj" />
-  </ItemGroup>
-
-</Project>

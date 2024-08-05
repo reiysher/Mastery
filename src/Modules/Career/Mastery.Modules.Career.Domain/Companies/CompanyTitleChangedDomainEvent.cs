@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Design;
-
-namespace Mastery.Modules.Career.Domain.Companies;
+﻿namespace Mastery.Modules.Career.Domain.Companies;
 
 public sealed class CompanyTitleChangedDomainEvent(Guid companyId, string newTitle) : DomainEvent
 {

@@ -1,5 +1,4 @@
 ﻿using Mastery.Modules.Career.Domain.Companies;
-using Mastery.Modules.Career.Domain.SharedKernel;
 
 namespace Mastery.Modules.Career.Domain.Jobs;
 
