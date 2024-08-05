@@ -1,13 +1,12 @@
-﻿using Mastery.Common.Application;
-using Mastery.Common.Presentation.Endpoints;
+﻿using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
 using Mastery.Modules.Identity.Application.Users;
 using Mastery.Modules.Identity.Domain.Users;
 using Mastery.Modules.Identity.Infrastructure.Authentication;
 using Mastery.Modules.Identity.Infrastructure.Persistence;
 using Mastery.Modules.Identity.Infrastructure.Persistence.Repositories;
+using Mastery.Modules.Identity.Presentation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mastery.Modules.Identity.Infrastructure;
@@ -16,29 +15,26 @@ public static class IdentityModule
 {
     public static IServiceCollection AddIdentityModule(
         this IServiceCollection services,
-        IConfiguration configuration)
+        string databaseConnectionString)
     {
-        IdentityModuleOptions options = configuration
-            .GetSection(IdentityModuleOptions.SectionName)
-            .Get<IdentityModuleOptions>()!;
-        
-        services.AddEndpoints(Presentation.AssemblyReference.Assembly);
-        services.AddApplication(Application.AssemblyReference.Assembly);
-        services.AddInfrastructure(options);
+        services.AddEndpoints(AssemblyReference.Assembly);
+        services.AddInfrastructure(databaseConnectionString);
         
         return services;
     }
 
-    private static IServiceCollection AddInfrastructure(this IServiceCollection services, IdentityModuleOptions moduleOptions)
+    private static IServiceCollection AddInfrastructure(
+        this IServiceCollection services, 
+        string databaseConnectionString)
     {
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IJwtService, JwtService>();
 
         services.AddDbContext<IdentityDbContext>(options =>
         {
-            options.UseNpgsql(moduleOptions.Database.ConnectionString, builder =>
+            options.UseNpgsql(databaseConnectionString, builder =>
             {
-                builder.MigrationsHistoryTable(moduleOptions.Database.MigrationsHistoryTable);
+                builder.MigrationsHistoryTable("ef_migrations_history");
                 builder.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName);
             });
 

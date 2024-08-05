@@ -17,16 +17,20 @@ builder.Configuration.AddModulesConfiguration("identity", "career");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCommonInfrastructure(
-    builder.Configuration.GetConnectionString("Database")!,
-    builder.Configuration.GetConnectionString("Cache")!);
+string databaseConnectionString = builder.Configuration.GetConnectionString("Database")!;
+string redisConnectionString = builder.Configuration.GetConnectionString("Cache")!;
 
-builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
-    .AddRedis(builder.Configuration.GetConnectionString("Cache")!);
+builder.Services.AddCommonApplication(
+    Mastery.Modules.Identity.Application.AssemblyReference.Assembly,
+    Mastery.Modules.Career.Application.AssemblyReference.Assembly);
+builder.Services.AddCommonInfrastructure(databaseConnectionString, redisConnectionString);
 
 builder.Services.AddCareerModule(builder.Configuration);
-builder.Services.AddIdentityModule(builder.Configuration);
+builder.Services.AddIdentityModule(databaseConnectionString);
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(databaseConnectionString)
+    .AddRedis(redisConnectionString);
 
 WebApplication app = builder.Build();
 
