@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Mastery.Common.Application.Caching;
 using Mastery.Common.Application.Data;
+using Mastery.Common.Infrastructure.Authentication;
+using Mastery.Common.Infrastructure.Authorization;
 using Mastery.Common.Infrastructure.Caching;
 using Mastery.Common.Infrastructure.Data;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,22 +14,36 @@ namespace Mastery.Common.Infrastructure;
 
 public static class InfrastructureConfiguration
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, string databaseConnectionString, string redisConnectionString)
+    public static IServiceCollection AddCommonInfrastructure(
+        this IServiceCollection services,
+        string databaseConnectionString,
+        string redisConnectionString)
     {
+        services.AddAuthenticationInternal();
+        services.AddAuthorizationInternal();
+        
         NpgsqlDataSource npgsqlDataSource = new NpgsqlDataSourceBuilder(databaseConnectionString).Build();
         services.TryAddSingleton(npgsqlDataSource);
 
         services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
 
         SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+        SqlMapper.AddTypeHandler(new GenericArrayHandler<string>());
 
         IConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
         services.TryAddSingleton(connectionMultiplexer);
 
-        services.AddStackExchangeRedisCache(optinos =>
+        try
         {
-            optinos.ConnectionMultiplexerFactory = () => Task.FromResult(connectionMultiplexer);
-        });
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.ConnectionMultiplexerFactory = () => Task.FromResult(connectionMultiplexer);
+            });
+        }
+        catch
+        {
+            services.AddDistributedMemoryCache();
+        }
 
         services.TryAddSingleton<ICacheService, CacheService>();
 

@@ -12,14 +12,12 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Configuration.AddModuleConfiguration(["career"]);
+builder.Configuration.AddModulesConfiguration("identity", "career");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplication([Mastery.Modules.Career.Application.AssemblyReference.Assembly]);
-
-builder.Services.AddInfrastructure(
+builder.Services.AddCommonInfrastructure(
     builder.Configuration.GetConnectionString("Database")!,
     builder.Configuration.GetConnectionString("Cache")!);
 

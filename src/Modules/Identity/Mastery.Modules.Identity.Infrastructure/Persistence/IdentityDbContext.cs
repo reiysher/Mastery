@@ -2,7 +2,7 @@
 using Mastery.Modules.Identity.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mastery.Modules.Identity.Infrastructure;
+namespace Mastery.Modules.Identity.Infrastructure.Persistence;
 
 internal sealed class IdentityDbContext(DbContextOptions<IdentityDbContext> options)
     : DbContext(options), IUnitOfWork

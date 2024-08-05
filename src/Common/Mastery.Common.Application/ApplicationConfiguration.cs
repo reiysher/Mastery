@@ -7,7 +7,7 @@ namespace Mastery.Common.Application;
 
 public static class ApplicationConfiguration
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services, Assembly[] moduleAssemblies)
+    public static IServiceCollection AddApplication(this IServiceCollection services, params Assembly[] moduleAssemblies)
     {
 
         services.AddMediatR(options =>
