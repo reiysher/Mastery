@@ -1,4 +1,5 @@
 ﻿using Mastery.Modules.Career.Infrastructure.Persistence;
+using Mastery.Modules.Identity.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mastery.Api.Extensions;
@@ -10,6 +11,7 @@ internal static class MigrationExtensions
         using IServiceScope scope = app.ApplicationServices.CreateScope();
 
         ApplyMigration<CareerDbContext>(scope);
+        ApplyMigration<IdentityDbContext>(scope);
     }
 
     private static void ApplyMigration<TDbContext>(IServiceScope scope)

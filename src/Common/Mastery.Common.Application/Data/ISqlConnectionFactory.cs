@@ -1,8 +1,8 @@
-﻿using System.Data;
+﻿using System.Data.Common;
 
 namespace Mastery.Common.Application.Data;
 
 public interface ISqlConnectionFactory
 {
-    ValueTask<IDbConnection> OpenConnectionAsync(CancellationToken cancellationToken = default);
+    ValueTask<DbConnection> OpenConnectionAsync(CancellationToken cancellationToken = default);
 }

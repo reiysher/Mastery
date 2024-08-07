@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿ <Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
 		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.1" />
@@ -19,10 +19,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Mastery.Common.Application\Mastery.Common.Application.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Outbox\" />
 	</ItemGroup>
 
 </Project>

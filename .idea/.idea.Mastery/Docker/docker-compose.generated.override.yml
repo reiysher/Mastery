@@ -23,8 +23,8 @@ services:
       RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "masteryapi:dev"
     ports:
-    - "127.0.0.1:57001:57100"
-    - "127.0.0.1:57201:57300"
+    - "127.0.0.1:57009:57100"
+    - "127.0.0.1:57209:57300"
     volumes:
     - "C:\\Users\\reiys\\.nuget\\packages:/home/app/.nuget/packages"
     - "D:\\Dev\\Projects\\Mastery\\src\\Api\\Mastery.Api:/app:rw"
@@ -33,5 +33,5 @@ services:
       Linux64:/opt/rider-debugger"
     - "C:\\Users\\reiys\\AppData\\Local\\JetBrains\\Installations\\Rider241\\bin:/etc/opt/rider-debugger/backend-log.xml"
     - "C:\\Users\\reiys\\AppData\\Local\\JetBrains\\Rider2024.1\\log\\DebuggerWorker\\\
-      JetBrains.Debugger.Worker.2024_8_04_14_12_50:/var/opt/rider-debugger:rw"
+      JetBrains.Debugger.Worker.2024_8_08_00_22_02:/var/opt/rider-debugger:rw"
     working_dir: "/app"

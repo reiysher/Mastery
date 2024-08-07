@@ -38,15 +38,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Common.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Common.Presentation", "src\Common\Mastery.Common.Presentation\Mastery.Common.Presentation.csproj", "{597E9B4D-30FB-4C14-BF9B-C2FFBB36AE4F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{013B4517-CC27-494F-8EB1-135C9018E7A8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{013B4517-CC27-494F-8EB1-135C9018E7A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Users.Application", "src\Modules\Identity\Mastery.Modules.Users.Application\Mastery.Modules.Users.Application.csproj", "{9010A4D5-821D-4946-8596-C9DE594CC3B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Identity.Application", "src\Modules\Identity\Mastery.Modules.Identity.Application\Mastery.Modules.Identity.Application.csproj", "{9010A4D5-821D-4946-8596-C9DE594CC3B9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Users.Domain", "src\Modules\Identity\Mastery.Modules.Users.Domain\Mastery.Modules.Users.Domain.csproj", "{6425E840-8744-440C-8F1E-C58E44091912}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Identity.Domain", "src\Modules\Identity\Mastery.Modules.Identity.Domain\Mastery.Modules.Identity.Domain.csproj", "{6425E840-8744-440C-8F1E-C58E44091912}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Users.Infrastructure", "src\Modules\Identity\Mastery.Modules.Users.Infrastructure\Mastery.Modules.Users.Infrastructure.csproj", "{2BDB577E-77BD-4176-A9A1-14C5E1ADEFB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Identity.Infrastructure", "src\Modules\Identity\Mastery.Modules.Identity.Infrastructure\Mastery.Modules.Identity.Infrastructure.csproj", "{2BDB577E-77BD-4176-A9A1-14C5E1ADEFB9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Users.Presentation", "src\Modules\Identity\Mastery.Modules.Users.Presentation\Mastery.Modules.Users.Presentation.csproj", "{1961C7A1-E188-4BF6-A38F-F50C610F191F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Identity.Presentation", "src\Modules\Identity\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj", "{1961C7A1-E188-4BF6-A38F-F50C610F191F}"
 EndProject
 Global
 	GlobalSection(ExtensibilityGlobals) = postSolution

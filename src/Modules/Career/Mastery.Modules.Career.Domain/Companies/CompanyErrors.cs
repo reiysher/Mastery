@@ -2,7 +2,7 @@
 
 public static class CompanyErrors
 {
-    public static readonly Error NotFound = new("Company.Found", "Company with specified identifier not found");
+    public static readonly Error NotFound = new("Company.NotFound", "Company with specified identifier not found");
 
     public static readonly Error InvalidTitle = new("Company.Title", "Provided title is invalid");
 
