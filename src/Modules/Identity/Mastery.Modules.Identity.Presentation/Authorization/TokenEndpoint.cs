@@ -26,7 +26,6 @@ internal sealed class TokenEndpoint : IEndpoint
                     await sender.Send(new RefreshTokenCommand(request.AccessToken, request.RefreshToken), cancellationToken)),
                 _ => Results.BadRequest(),
             })
-            .WithGroupName("default")
             .AllowAnonymous()
             .Produces<TokenResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
             .WithOpenApi()
