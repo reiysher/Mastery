@@ -6,7 +6,7 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
     public required TId Id { get; init; }
 
     public static bool operator ==(Entity<TId>? left, Entity<TId>? right) =>
-        left is not null && right is not null && left.Equals(right);
+        left is not null && right is not null && left.Equals(right) || left is null && right is null;
 
     public static bool operator !=(Entity<TId>? left, Entity<TId>? right) =>
         !(left == right);
