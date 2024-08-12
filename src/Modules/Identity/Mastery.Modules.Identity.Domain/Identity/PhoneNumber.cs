@@ -15,7 +15,7 @@ public sealed partial record PhoneNumber
 
     private PhoneNumber() { }
 
-    internal static Result<PhoneNumber> From(string? countryCode, string? phoneNumber)
+    internal static Result<PhoneNumber> Parse(string? countryCode, string? phoneNumber)
     {
         if (string.IsNullOrWhiteSpace(countryCode) || !countryCode.StartsWith('+'))
         {

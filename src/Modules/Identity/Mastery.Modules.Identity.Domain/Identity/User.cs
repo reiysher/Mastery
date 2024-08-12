@@ -38,13 +38,13 @@ public sealed class User : Aggregate<Guid>
             return Result.Failure<User>(fullNameResult.Error);
         }
 
-        Result<Email> emailResult = Email.Create(email);
+        Result<Email> emailResult = Email.Parse(email);
         if (emailResult.IsFailure)
         {
             return Result.Failure<User>(emailResult.Error);
         }
 
-        Result<PhoneNumber> phoneNumberResult = PhoneNumber.From(countryCode, phoneNumber);
+        Result<PhoneNumber> phoneNumberResult = PhoneNumber.Parse(countryCode, phoneNumber);
         if (phoneNumberResult.IsFailure)
         {
             return Result.Failure<User>(phoneNumberResult.Error);

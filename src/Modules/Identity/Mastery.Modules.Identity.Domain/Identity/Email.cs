@@ -13,7 +13,7 @@ public sealed partial record Email
 
     public bool Confirmed { get; private set; }
 
-    public static Result<Email> Create(string value)
+    public static Result<Email> Parse(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || !EmailValidationRegex().IsMatch(value))
         {
