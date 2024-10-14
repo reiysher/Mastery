@@ -18,7 +18,7 @@ public sealed record TokenRequest
 
     [JsonPropertyName("refresh_token")]
     public string? RefreshToken { get; init; }
-    
+
     public enum TokenGrantType
     {
         Password = 1,

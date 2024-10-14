@@ -21,9 +21,13 @@ internal sealed class TokenEndpoint : IEndpoint
                 CancellationToken cancellationToken) => request.GrantType switch
             {
                 TokenRequest.TokenGrantType.Password => Results.Ok(
-                    await sender.Send(new GenerateTokenCommand(request.Email, request.Password), cancellationToken)),
+                    await sender.Send(
+                        new GenerateTokenCommand(request.Email, request.Password),
+                        cancellationToken)),
                 TokenRequest.TokenGrantType.RefreshToken => Results.Ok(
-                    await sender.Send(new RefreshTokenCommand(request.AccessToken, request.RefreshToken), cancellationToken)),
+                    await sender.Send(
+                        new RefreshTokenCommand(request.AccessToken, request.RefreshToken),
+                        cancellationToken)),
                 _ => Results.BadRequest(),
             })
             .AllowAnonymous()

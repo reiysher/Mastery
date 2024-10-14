@@ -1,4 +1,4 @@
-﻿using Mastery.Modules.Identity.Domain.Identity;
+﻿using Mastery.Modules.Identity.Domain.Roles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,11 +10,9 @@ internal sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
         builder.ToTable("roles");
 
-        builder.HasMany(role => role.Permissions)
-            .WithMany()
-            .UsingEntity(joinBuilder =>
-            {
-                joinBuilder.ToTable("role_permissions");
-            });
+        builder.OwnsMany(role => role.Permissions, permissionBuilder =>
+        {
+            permissionBuilder.ToJson();
+        });
     }
 }

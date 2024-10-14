@@ -1,9 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Mastery.Common.Infrastructure.Authentication;
 using Mastery.Modules.Identity.Application.Identity;
-using Mastery.Modules.Identity.Domain.Identity;
+using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,10 +18,10 @@ internal sealed class TokenService(
 {
     private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
-    public JwtSecurityToken CreateToken(User user)
+    public JwtSecurityToken CreateToken(User user, IReadOnlyCollection<string> userPermissions)
     {
         DateTimeOffset expires = timeProvider.GetUtcNow().AddMinutes(_jwtSettings.TokenExpirationInMinutes);
-        IEnumerable<Claim> authClaims = GetClaims(user);
+        IEnumerable<Claim> authClaims = GetClaims(user, userPermissions);
         SigningCredentials signingCredentials = GetSigningCredentials();
 
         return new JwtSecurityToken(
@@ -68,13 +70,17 @@ internal sealed class TokenService(
         return principal;
     }
 
-    private static IEnumerable<Claim> GetClaims(User user)
+    private static IEnumerable<Claim> GetClaims(User user, IReadOnlyCollection<string> userPermissions)
     {
+        IEnumerable<Claim> permissions = userPermissions
+                .Select(permission => new Claim(CustomClaims.Permissions, permission));
+
         return
         [
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email.Value),
-            new Claim(ClaimTypes.MobilePhone, user.PhoneNumber.Value)
+            new Claim(ClaimTypes.MobilePhone, user.PhoneNumber.Value),
+            .. permissions
         ];
     }
 

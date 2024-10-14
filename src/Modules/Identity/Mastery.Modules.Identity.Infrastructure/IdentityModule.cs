@@ -1,7 +1,9 @@
 ﻿using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
 using Mastery.Modules.Identity.Application.Identity;
-using Mastery.Modules.Identity.Domain.Identity;
+using Mastery.Modules.Identity.Domain.Permissions;
+using Mastery.Modules.Identity.Domain.Roles;
+using Mastery.Modules.Identity.Domain.Users;
 using Mastery.Modules.Identity.Infrastructure.Authentication;
 using Mastery.Modules.Identity.Infrastructure.Persistence;
 using Mastery.Modules.Identity.Infrastructure.Persistence.Repositories;
@@ -21,12 +23,12 @@ public static class IdentityModule
     {
         services.AddEndpoints(AssemblyReference.Assembly);
         services.AddInfrastructure(databaseConnectionString);
-        
+
         return services;
     }
 
     private static IServiceCollection AddInfrastructure(
-        this IServiceCollection services, 
+        this IServiceCollection services,
         string databaseConnectionString)
     {
         services.AddOptions<JwtSettings>()
@@ -41,7 +43,7 @@ public static class IdentityModule
 
         services.AddScoped<ISeeder, RolesSeeder>();
         services.AddScoped<ISeeder, UsersSeeder>();
-        
+
         services.AddDbContext<IdentityDbContext>(options =>
         {
             options.UseNpgsql(databaseConnectionString, builder =>
@@ -52,8 +54,10 @@ public static class IdentityModule
 
             options.UseSnakeCaseNamingConvention();
         });
-        
+
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IPermissionRepository, PermissionRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<IdentityDbContext>());
 

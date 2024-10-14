@@ -2,7 +2,7 @@
 
 namespace Mastery.Modules.Identity.Application.Identity;
 
-public sealed record TokenResponse 
+public sealed record TokenResponse
 {
     public TokenResponse(
         string? accessToken,
@@ -31,7 +31,7 @@ public sealed record TokenResponse
     [JsonPropertyName("expires_in")]
     public DateTimeOffset? ExpiresIn { get; init; }
 
-    public string? Error { get; init; } 
+    public string? Error { get; init; }
 
     [JsonPropertyName("error_description")]
     public string? ErrorDescription { get; init; }

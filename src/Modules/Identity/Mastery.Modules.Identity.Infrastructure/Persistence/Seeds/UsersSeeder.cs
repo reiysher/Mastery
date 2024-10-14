@@ -1,5 +1,6 @@
 ﻿using Mastery.Common.Domain;
-using Mastery.Modules.Identity.Domain.Identity;
+using Mastery.Modules.Identity.Domain.Roles;
+using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -56,7 +57,7 @@ internal sealed class UsersSeeder(
                 {
                     logger.LogInformation("Assigning {Role} to {User}.", role.Name, defaultUser.Email);
                     user.AddRole(role);
-                
+
                     dbContext.Attach(role);
                 }
             }

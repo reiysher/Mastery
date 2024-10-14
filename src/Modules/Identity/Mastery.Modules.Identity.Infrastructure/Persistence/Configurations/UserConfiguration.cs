@@ -1,4 +1,4 @@
-﻿using Mastery.Modules.Identity.Domain.Identity;
+﻿using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -43,7 +43,7 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
                 .Property(phoneNumber => phoneNumber.CountryCode)
                 .HasMaxLength(16)
                 .HasColumnName("phone_number_country_code");
-            
+
             phoneNumberBuilder
                 .Property(phoneNumber => phoneNumber.Value)
                 .HasMaxLength(32)
@@ -54,12 +54,31 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
                 .HasColumnName("ephone_number_confirmed");
         });
 
-        builder.HasMany(user => user.Roles)
-            .WithMany()
-            .UsingEntity(joinBuilder =>
-            {
-                joinBuilder.ToTable("user_roles");
-            });
+        builder.OwnsMany(user => user.Tokens, tokenBuilder =>
+        {
+            tokenBuilder.ToTable("user_tokens");
+
+            tokenBuilder
+                .Property(token => token.Name)
+                .HasMaxLength(64);
+
+            tokenBuilder
+                .Property(token => token.LoginProvider)
+                .HasMaxLength(64);
+
+            tokenBuilder
+                .Property(token => token.AccessToken)
+                .HasMaxLength(2048);
+
+            tokenBuilder
+                .Property(token => token.RefreshToken)
+                .HasMaxLength(512);
+        });
+
+        builder.OwnsMany(user => user.Roles, roleBuilder =>
+        {
+            roleBuilder.ToJson();
+        });
 
         builder.Property<uint>("Version").IsRowVersion();
     }

@@ -1,12 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 using Mastery.Common.Domain;
+using Mastery.Modules.Identity.Domain.Users;
 
 namespace Mastery.Modules.Identity.Domain.Identity;
 
 public sealed partial record Email
 {
     private const string Pattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
-    
+
     private Email() { }
 
     public string Value { get; private init; }

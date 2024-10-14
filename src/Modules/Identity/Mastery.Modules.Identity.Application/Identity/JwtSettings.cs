@@ -5,7 +5,7 @@ namespace Mastery.Modules.Identity.Application.Identity;
 public class JwtSettings
 {
     public const string SectionName = "JwtSettings";
-    
+
     [Required, MaxLength(100)]
     public string LoginProvider { get; set; } = default!;
 

@@ -3,6 +3,6 @@
 internal interface ISeeder
 {
     int Order { get; }
-    
+
     Task SeedAsync(IdentityDbContext dbContext, CancellationToken cancellationToken);
 }

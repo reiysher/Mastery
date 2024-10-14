@@ -1,4 +1,4 @@
-﻿using Mastery.Modules.Identity.Domain.Identity;
+﻿using Mastery.Modules.Identity.Domain.Users;
 using Mastery.Modules.Identity.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

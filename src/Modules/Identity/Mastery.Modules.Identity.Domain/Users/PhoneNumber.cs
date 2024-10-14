@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Mastery.Common.Domain;
+using Mastery.Modules.Identity.Domain.Users;
 
 namespace Mastery.Modules.Identity.Domain.Identity;
 

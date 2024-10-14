@@ -1,6 +1,6 @@
 ﻿using Mastery.Common.Domain;
 
-namespace Mastery.Modules.Identity.Domain.Identity;
+namespace Mastery.Modules.Identity.Domain.Users;
 
 public sealed class UserRegisteredDomainEvent(Guid userId) : DomainEvent
 {

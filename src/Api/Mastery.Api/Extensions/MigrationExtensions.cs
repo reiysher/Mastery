@@ -1,4 +1,6 @@
 ﻿using Mastery.Modules.Career.Infrastructure.Persistence;
+using Mastery.Modules.Identity.Domain.Permissions;
+using Mastery.Modules.Identity.Domain.Roles;
 using Mastery.Modules.Identity.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +21,14 @@ internal static class MigrationExtensions
     {
         using TDbContext context = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
-        context.Database.Migrate();
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
+
+        if (context is IdentityDbContext)
+        {
+            context.AddRange(Permission.All);
+            context.AddRange(Role.All);
+            context.SaveChanges();
+        }
     }
 }

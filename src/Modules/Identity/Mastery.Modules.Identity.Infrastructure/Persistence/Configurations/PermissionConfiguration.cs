@@ -1,4 +1,4 @@
-﻿using Mastery.Modules.Identity.Domain.Identity;
+﻿using Mastery.Modules.Identity.Domain.Permissions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

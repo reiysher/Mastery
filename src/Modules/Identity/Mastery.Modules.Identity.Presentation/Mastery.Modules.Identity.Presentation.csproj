@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Mastery.Modules.Identity.Application\Mastery.Modules.Identity.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Users\" />
-  </ItemGroup>
-
 </Project>

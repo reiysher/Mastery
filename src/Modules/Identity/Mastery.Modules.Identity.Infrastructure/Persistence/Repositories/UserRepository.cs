@@ -1,6 +1,9 @@
 ﻿using Mastery.Common.Infrastructure.Repositories;
-using Mastery.Modules.Identity.Domain.Identity;
+using Mastery.Modules.Identity.Domain.Permissions;
+using Mastery.Modules.Identity.Domain.Roles;
+using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Mastery.Modules.Identity.Infrastructure.Persistence.Repositories;
 
@@ -9,8 +12,30 @@ internal sealed class UserRepository(IdentityDbContext dbContext)
 {
     public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
-        return await dbContext.Set<User>()
-            .Include(user => user.Roles)
+        return await dbContext
+            .Set<User>()
             .SingleOrDefaultAsync(user => user.Email.Value == email, cancellationToken);
+    }
+
+    public async Task<IReadOnlyCollection<string>> GetUserPermissions(
+        Guid userId,
+        CancellationToken cancellationToken)
+    {
+        return await dbContext
+            .Set<User>()
+            .Where(user => user.Id == userId)
+            .SelectMany(user => user.Roles)
+            .Join(
+                DbContext.Set<Role>(),
+                userRole => userRole.RoleId,
+                role => role.Id,
+                (userRole, role) => role)
+            .SelectMany(role => role.Permissions)
+            .Join(
+                DbContext.Set<Permission>(),
+                rolePermission => rolePermission.PermissionId,
+                permission => permission.Id,
+                (rolePermission, permission) => permission.Code)
+            .ToArrayAsync(cancellationToken);
     }
 }

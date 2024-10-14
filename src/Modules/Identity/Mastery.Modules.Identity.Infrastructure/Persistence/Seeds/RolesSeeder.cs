@@ -1,4 +1,4 @@
-﻿using Mastery.Modules.Identity.Domain.Identity;
+﻿using Mastery.Modules.Identity.Domain.Roles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -15,7 +15,7 @@ internal sealed class RolesSeeder(ILogger<RolesSeeder> logger) : ISeeder
             bool isExists = await dbContext
                 .Set<Role>()
                 .AnyAsync(r => r.Id == role.Id, cancellationToken);
-            
+
             if (!isExists)
             {
                 logger.LogInformation("Seeding {Role} Role.", role.Name);

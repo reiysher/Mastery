@@ -1,27 +1,29 @@
 ﻿using Mastery.Common.Domain;
+using Mastery.Modules.Identity.Domain.Identity;
+using Mastery.Modules.Identity.Domain.Roles;
 
-namespace Mastery.Modules.Identity.Domain.Identity;
+namespace Mastery.Modules.Identity.Domain.Users;
 
 public sealed class User : Aggregate<Guid>
 {
-    private readonly HashSet<Role> _roles = [];
+    private readonly HashSet<UserRole> _roles = [];
     private readonly HashSet<UserToken> _tokens = [];
-    
+
     public FullName Name { get; private set; } = default!;
 
     public Email Email { get; private set; } = default!;
-    
+
     public PhoneNumber PhoneNumber { get; private set; } = default!;
-    
+
     public string UserName { get; private set; }
-    
+
     public string NormalizedUserName { get; private set; }
-    
+
     public string? PasswordHash { get; private set; }
 
-    public IReadOnlyCollection<Role> Roles => [.._roles];
+    public IReadOnlyCollection<UserRole> Roles => [.. _roles];
 
-    public IReadOnlyCollection<UserToken> Tokens => [.._tokens];
+    public IReadOnlyCollection<UserToken> Tokens => [.. _tokens];
 
     private User() { }
 
@@ -57,8 +59,10 @@ public sealed class User : Aggregate<Guid>
             Email = emailResult.Value,
             PhoneNumber = phoneNumberResult.Value,
         };
-        
-        user._roles.Add(Role.Basic);
+
+        user.SetUserName(emailResult.Value.Value);
+
+        user._roles.Add(new UserRole(Role.Basic.Id));
 
         user.Raise(new UserRegisteredDomainEvent(user.Id));
 
@@ -71,7 +75,7 @@ public sealed class User : Aggregate<Guid>
         {
             throw new InvalidOperationException("invalid_user_name");
         }
-        
+
         UserName = name;
         NormalizedUserName = name.Normalize();
     }
@@ -82,18 +86,18 @@ public sealed class User : Aggregate<Guid>
         {
             throw new InvalidOperationException("invalid_user_name");
         }
-        
+
         NormalizedUserName = name;
     }
 
     public void AddRole(Role role)
     {
-        if (_roles.Any(r => r.Id == role.Id))
+        if (_roles.Any(r => r.RoleId == role.Id))
         {
             return;
         }
-        
-        _roles.Add(role);
+
+        _roles.Add(new UserRole(role.Id));
     }
 
     public void SetPasswordHash(string? passwordHash)
@@ -102,17 +106,9 @@ public sealed class User : Aggregate<Guid>
         {
             throw new InvalidOperationException("invalid_password_hash");
         }
-        
+
         // use collection for history
         PasswordHash = passwordHash;
-    }
-
-    public IReadOnlyCollection<string> GetPermissions()
-    {
-        return _roles
-            .SelectMany(role => role.Permissions
-                .Select(claim => claim.Code))
-            .ToHashSet();
     }
 
     public UserToken? GetToken(string loginProvider)

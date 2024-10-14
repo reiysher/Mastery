@@ -2,13 +2,13 @@
 using Mastery.Common.Application.Messaging;
 using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
-using Mastery.Modules.Identity.Domain.Identity;
+using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
 namespace Mastery.Modules.Identity.Application.Identity.GenerateToken;
 
-internal sealed class GenerateTokenCommandHandler(
+internal sealed class GenerateTokenHandler(
     TimeProvider timeProvider,
     IUnitOfWork unitOfWork,
     IPasswordHasher<User> passwordHasher,
@@ -23,7 +23,7 @@ internal sealed class GenerateTokenCommandHandler(
         {
             throw new InvalidOperationException("authentication_failed");
         }
-        
+
         User user = await userRepository.GetByEmailAsync(command.Email.Trim().Normalize(), cancellationToken)
                     ?? throw new InvalidOperationException("authentication_failed");
 
@@ -35,7 +35,11 @@ internal sealed class GenerateTokenCommandHandler(
             throw new InvalidOperationException("authentication_failed");
         }
 
-        JwtSecurityToken token = tokenService.CreateToken(user);
+        IReadOnlyCollection<string> permissions = await userRepository.GetUserPermissions(
+            user.Id,
+            cancellationToken);
+
+        JwtSecurityToken token = tokenService.CreateToken(user, permissions);
 
         user.SetToken(
             jwtSettings.Value.LoginProvider,

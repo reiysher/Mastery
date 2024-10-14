@@ -3,12 +3,12 @@ using System.Security.Claims;
 using Mastery.Common.Application.Messaging;
 using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
-using Mastery.Modules.Identity.Domain.Identity;
+using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.Extensions.Options;
 
 namespace Mastery.Modules.Identity.Application.Identity.RefreshToken;
 
-internal sealed class RefreshTokenCommandHandler(
+internal sealed class RefreshTokenHandler(
     TimeProvider timeProvider,
     IUnitOfWork unitOfWork,
     ITokenService tokenService,
@@ -33,7 +33,11 @@ internal sealed class RefreshTokenCommandHandler(
             throw new InvalidOperationException("invalid_refresh_token");
         }
 
-        JwtSecurityToken token = tokenService.CreateToken(user);
+        IReadOnlyCollection<string> permissions = await userRepository.GetUserPermissions(
+            user.Id,
+            cancellationToken);
+
+        JwtSecurityToken token = tokenService.CreateToken(user, permissions);
 
         user.SetToken(
             jwtSettings.Value.LoginProvider,
