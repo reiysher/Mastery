@@ -5,12 +5,19 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.1" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
 	</ItemGroup>
 	
 	<ItemGroup>
 	  <ProjectReference Include="..\Mastery.Common.Application\Mastery.Common.Application.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Update="SonarAnalyzer.CSharp" Version="9.32.0.97167">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

@@ -4,5 +4,12 @@
 		<ProjectReference Include="..\..\..\Common\Mastery.Common.Application\Mastery.Common.Application.csproj" />
 		<ProjectReference Include="..\Mastery.Modules.Career.Domain\Mastery.Modules.Career.Domain.csproj" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Update="SonarAnalyzer.CSharp" Version="9.32.0.97167">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
 
 </Project>
