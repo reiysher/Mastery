@@ -1,7 +1,6 @@
 ﻿using Mastery.Modules.Career.Infrastructure.Persistence;
-using Mastery.Modules.Identity.Domain.Permissions;
-using Mastery.Modules.Identity.Domain.Roles;
 using Mastery.Modules.Identity.Infrastructure.Persistence;
+using Mastery.Modules.Identity.Infrastructure.Persistence.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mastery.Api.Extensions;
@@ -23,12 +22,18 @@ internal static class MigrationExtensions
 
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
+    }
 
-        if (context is IdentityDbContext)
+    public static async Task SeedDataAsync(this IApplicationBuilder app)
+    {
+        using IServiceScope scope = app.ApplicationServices.CreateScope();
+        IOrderedEnumerable<ISeeder> seeders = scope.ServiceProvider
+            .GetServices<ISeeder>()
+            .OrderBy(s => s.Order);
+
+        foreach (ISeeder? seeder in seeders)
         {
-            context.AddRange(Permission.All);
-            context.AddRange(Role.All);
-            context.SaveChanges();
+            await seeder.SeedAsync();
         }
     }
 }

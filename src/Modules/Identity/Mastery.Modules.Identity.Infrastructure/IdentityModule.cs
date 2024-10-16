@@ -31,6 +31,11 @@ public static class IdentityModule
         this IServiceCollection services,
         string databaseConnectionString)
     {
+        services.AddOptions<List<DefaultUser>>()
+            .BindConfiguration("IdentityModule:Seeds:Users")
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         services.AddOptions<JwtSettings>()
             .BindConfiguration(JwtSettings.SectionName)
             .ValidateDataAnnotations()
@@ -42,6 +47,7 @@ public static class IdentityModule
         services.AddTransient<ITokenService, TokenService>();
 
         services.AddScoped<ISeeder, RolesSeeder>();
+        services.AddScoped<ISeeder, PermissionsSeeder>();
         services.AddScoped<ISeeder, UsersSeeder>();
 
         services.AddDbContext<IdentityDbContext>(options =>

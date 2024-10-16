@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Mastery.Api.Middleware;
+using Mastery.Common.Presentation;
 using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Identity.Infrastructure;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -25,6 +26,7 @@ builder.Services.AddCommonApplication(
     Mastery.Modules.Identity.Application.AssemblyReference.Assembly,
     Mastery.Modules.Career.Application.AssemblyReference.Assembly);
 builder.Services.AddCommonInfrastructure(databaseConnectionString, redisConnectionString);
+builder.Services.AddCommonPresentation();
 
 builder.Services.AddCareerModule(builder.Configuration);
 builder.Services.AddIdentityModule(databaseConnectionString);
@@ -41,6 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     app.ApplyMigrations();
+    await app.SeedDataAsync();
 }
 
 app.MapHealthChecks("health", new HealthCheckOptions { ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse });

@@ -1,6 +1,7 @@
 ﻿using Mastery.Common.Application.Messaging;
 using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
+using Mastery.Modules.Identity.Domain.Identity;
 using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 
@@ -26,12 +27,29 @@ internal sealed class RegisterUserHandler(
             return Result.Failure<RegisterUserResponse>(UserErrors.ConfirmPasswordIsDifferent);
         }
 
+        Result<FullName> fullNameResult = FullName.From(command.FirstName, command.LastName);
+        if (fullNameResult.IsFailure)
+        {
+            return Result.Failure<RegisterUserResponse>(fullNameResult.Error);
+        }
+
+        Result<Email> emailResult = Email.Parse(command.Email);
+        if (emailResult.IsFailure)
+        {
+            return Result.Failure<RegisterUserResponse>(emailResult.Error);
+        }
+
+        Result<PhoneNumber> phoneNumberResult = PhoneNumber.Parse(command.CountryCode, command.PhoneNumber);
+        if (phoneNumberResult.IsFailure)
+        {
+            return Result.Failure<RegisterUserResponse>(phoneNumberResult.Error);
+        }
+
+
         Result<User> userResult = User.Create(
-            command.FirstName,
-            command.LastName,
-            command.Email,
-            command.CountryCode,
-            command.PhoneNumber);
+            fullNameResult.Value,
+            emailResult.Value,
+            phoneNumberResult.Value);
 
         user = userResult.Value;
 

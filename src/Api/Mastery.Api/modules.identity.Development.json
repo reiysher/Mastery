@@ -1,5 +1,20 @@
 ﻿{
   "IdentityModule": {
-    
+    "Seeds": {
+      "Users": [
+        {
+          "FirstName": "FirstName",
+          "LastName": "LastName",
+          "Email": "some.email@mail.com",
+          "CountryCode": "+7",
+          "PhoneNumber": "9999999999",
+          "Password": "123456",
+          "Roles": [
+            "Basic",
+            "Administrator"
+          ]
+        }
+      ]
+    }
   }
 }

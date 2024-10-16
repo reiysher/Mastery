@@ -9,11 +9,11 @@ public sealed class User : Aggregate<Guid>
     private readonly HashSet<UserRole> _roles = [];
     private readonly HashSet<UserToken> _tokens = [];
 
-    public FullName Name { get; private set; } = default!;
+    public FullName Name { get; private set; }
 
-    public Email Email { get; private set; } = default!;
+    public Email Email { get; private set; }
 
-    public PhoneNumber PhoneNumber { get; private set; } = default!;
+    public PhoneNumber PhoneNumber { get; private set; }
 
     public string UserName { get; private set; }
 
@@ -28,39 +28,23 @@ public sealed class User : Aggregate<Guid>
     private User() { }
 
     public static Result<User> Create(
-        string firstName,
-        string lastName,
-        string email,
-        string countryCode,
-        string phoneNumber)
+        FullName fullName,
+        Email email,
+        PhoneNumber phoneNumber)
     {
-        Result<FullName> fullNameResult = FullName.From(firstName, lastName);
-        if (fullNameResult.IsFailure)
-        {
-            return Result.Failure<User>(fullNameResult.Error);
-        }
-
-        Result<Email> emailResult = Email.Parse(email);
-        if (emailResult.IsFailure)
-        {
-            return Result.Failure<User>(emailResult.Error);
-        }
-
-        Result<PhoneNumber> phoneNumberResult = PhoneNumber.Parse(countryCode, phoneNumber);
-        if (phoneNumberResult.IsFailure)
-        {
-            return Result.Failure<User>(phoneNumberResult.Error);
-        }
+        ArgumentNullException.ThrowIfNull(fullName);
+        ArgumentNullException.ThrowIfNull(email);
+        ArgumentNullException.ThrowIfNull(phoneNumber);
 
         var user = new User
         {
             Id = Guid.NewGuid(),
-            Name = fullNameResult.Value,
-            Email = emailResult.Value,
-            PhoneNumber = phoneNumberResult.Value,
+            Name = fullName,
+            Email = email,
+            PhoneNumber = phoneNumber,
         };
 
-        user.SetUserName(emailResult.Value.Value);
+        user.SetUserName(email.Value);
 
         user._roles.Add(new UserRole(Role.Basic.Id));
 

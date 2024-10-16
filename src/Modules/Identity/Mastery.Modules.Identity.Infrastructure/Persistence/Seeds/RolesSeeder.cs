@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Mastery.Modules.Identity.Infrastructure.Persistence.Seeds;
 
-internal sealed class RolesSeeder(ILogger<RolesSeeder> logger) : ISeeder
+internal sealed class RolesSeeder(IdentityDbContext dbContext, ILogger<RolesSeeder> logger) : ISeeder
 {
     public int Order => 10;
 
-    public async Task SeedAsync(IdentityDbContext dbContext, CancellationToken cancellationToken)
+    public async Task SeedAsync(CancellationToken cancellationToken = default)
     {
         foreach (Role role in Role.All)
         {
