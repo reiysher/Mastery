@@ -8,8 +8,6 @@ public static class PresentationConfiguration
 {
     public static IServiceCollection AddCommonPresentation(this IServiceCollection services)
     {
-        services.AddHttpContextAccessor();
-
         services.AddScoped<ICurrentUserContext, CurrentUserContext>();
 
         return services;

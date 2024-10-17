@@ -5,7 +5,7 @@
         {
           "FirstName": "FirstName",
           "LastName": "LastName",
-          "Email": "some.email@mail.com",
+          "Email": "mail@mail.com",
           "CountryCode": "+7",
           "PhoneNumber": "9999999999",
           "Password": "123456",

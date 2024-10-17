@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Mastery.Common.Infrastructure.Authentication;
 
-internal sealed class JwtBearerConfigureOptions(IConfiguration configuration)
+internal sealed class JwtBearerConfigureOptions(IConfiguration configuration, IOptions<JwtSettings> jwtSettings)
     : IConfigureNamedOptions<JwtBearerOptions>
 {
     private const string ConfigurationSectionName = "Authentication";
@@ -14,19 +18,18 @@ internal sealed class JwtBearerConfigureOptions(IConfiguration configuration)
     {
         configuration.GetSection(ConfigurationSectionName).Bind(options);
 
+        options.Audience = jwtSettings.Value.Audience;
+        options.Authority = jwtSettings.Value.Authority;
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Value.Key)),
+            ValidAudiences = [options.Audience],
+            ValidIssuers = [options.Authority],
+        };
+
         options.Events = new JwtBearerEvents
         {
-            OnChallenge = context =>
-            {
-                context.HandleResponse();
-                if (!context.Response.HasStarted)
-                {
-                    throw new InvalidOperationException("authentication_failed");
-                }
-
-                return Task.CompletedTask;
-            },
-            OnForbidden = _ => throw new InvalidOperationException("You are not authorized to access this resource."),
             OnMessageReceived = context =>
             {
                 StringValues accessToken = context.Request.Query["access_token"];
@@ -34,9 +37,21 @@ internal sealed class JwtBearerConfigureOptions(IConfiguration configuration)
                 if (!string.IsNullOrEmpty(accessToken) &&
                     context.HttpContext.Request.Path.StartsWithSegments("/notifications"))
                 {
-                    // Read the token out of the query string
                     context.Token = accessToken;
                 }
+
+                return Task.CompletedTask;
+            },
+
+            OnTokenValidated = context =>
+            {
+                if (context.SecurityToken is not JsonWebToken accessToken)
+                {
+                    return Task.CompletedTask;
+                }
+
+                var identity = context.Principal?.Identity as ClaimsIdentity;
+                identity?.AddClaim(new Claim("access_token", accessToken.EncodedToken));
 
                 return Task.CompletedTask;
             }

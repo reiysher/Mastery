@@ -42,6 +42,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Identity.In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastery.Modules.Identity.Presentation", "src\Modules\Identity\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj", "{1961C7A1-E188-4BF6-A38F-F50C610F191F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC5D42A0-75B0-4C1C-B435-2BE7E1DD9A4E}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

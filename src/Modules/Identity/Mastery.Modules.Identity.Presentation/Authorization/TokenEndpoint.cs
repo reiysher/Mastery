@@ -1,5 +1,7 @@
 ﻿using System.Net.Mime;
+using Mastery.Common.Domain;
 using Mastery.Common.Presentation.Endpoints;
+using Mastery.Common.Presentation.Results;
 using Mastery.Modules.Identity.Application.Identity;
 using Mastery.Modules.Identity.Application.Identity.GenerateToken;
 using Mastery.Modules.Identity.Application.Identity.RefreshToken;
@@ -18,18 +20,28 @@ internal sealed class TokenEndpoint : IEndpoint
         app.MapPost("connect/token", async (
                 [FromServices] ISender sender,
                 [FromBody] TokenRequest request,
-                CancellationToken cancellationToken) => request.GrantType switch
+                CancellationToken cancellationToken) =>
             {
-                TokenRequest.TokenGrantType.Password => Results.Ok(
-                    await sender.Send(
-                        new GenerateTokenCommand(request.Email, request.Password),
-                        cancellationToken)),
-                TokenRequest.TokenGrantType.RefreshToken => Results.Ok(
-                    await sender.Send(
-                        new RefreshTokenCommand(request.AccessToken, request.RefreshToken),
-                        cancellationToken)),
-                _ => Results.BadRequest(),
-            })
+                switch (request.GrantType)
+                {
+                    case TokenRequest.TokenGrantType.Password:
+                        {
+                            var command = new GenerateTokenCommand(request.Email, request.Password);
+                            Result<TokenResponse> result = await sender.Send(command, cancellationToken);
+                            return result.Match(Results.Ok, ApiResults.Problem);
+                        }
+                    case TokenRequest.TokenGrantType.RefreshToken:
+                        {
+                            var command = new RefreshTokenCommand(request.AccessToken, request.RefreshToken);
+                            Result<TokenResponse> result = await sender.Send(command, cancellationToken);
+                            return result.Match(Results.Ok, ApiResults.Problem);
+                        }
+
+                }
+
+                return Results.BadRequest();
+            }
+            )
             .AllowAnonymous()
             .Produces<TokenResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
             .WithOpenApi()

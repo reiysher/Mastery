@@ -26,9 +26,11 @@ internal sealed class GetCurrentUserEndpoint : IEndpoint
             return result.Match(Results.Ok, ApiResults.Problem);
 
         })
-            .AllowAnonymous()
+            .RequireAuthorization("users:read")
             .Produces<GetCurrentUserResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
             .WithOpenApi()
-            .WithTags("Users");
+            .WithTags("Users")
+            .WithDescription("Current user info.")
+            .WithSummary("Returns current user info.");
     }
 }

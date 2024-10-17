@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Mastery.Modules.Identity.Infrastructure.Persistence.Seeds;
+namespace Mastery.Common.Infrastructure.Data;
 
 public interface ISeeder
 {

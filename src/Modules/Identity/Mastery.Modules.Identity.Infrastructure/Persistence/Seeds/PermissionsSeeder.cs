@@ -1,4 +1,5 @@
-﻿using Mastery.Modules.Identity.Domain.Permissions;
+﻿using Mastery.Common.Infrastructure.Data;
+using Mastery.Modules.Identity.Domain.Permissions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

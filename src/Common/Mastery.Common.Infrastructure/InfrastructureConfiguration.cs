@@ -47,6 +47,10 @@ public static class InfrastructureConfiguration
 
         services.TryAddSingleton<ICacheService, CacheService>();
 
+        services.AddOptions<JwtSettings>()
+            .BindConfiguration(JwtSettings.SectionName)
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
 
         return services;
     }

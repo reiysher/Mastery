@@ -59,20 +59,16 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             tokenBuilder.ToTable("user_tokens");
 
             tokenBuilder
-                .Property(token => token.Name)
-                .HasMaxLength(64);
-
-            tokenBuilder
-                .Property(token => token.LoginProvider)
-                .HasMaxLength(64);
-
-            tokenBuilder
                 .Property(token => token.AccessToken)
                 .HasMaxLength(2048);
 
             tokenBuilder
                 .Property(token => token.RefreshToken)
                 .HasMaxLength(512);
+
+            tokenBuilder
+                .Property(token => token.Created)
+                .IsRequired(true);
         });
 
         builder.OwnsMany(user => user.Roles, roleBuilder =>

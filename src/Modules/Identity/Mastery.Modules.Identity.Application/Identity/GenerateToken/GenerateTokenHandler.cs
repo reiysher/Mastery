@@ -1,20 +1,17 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Mastery.Common.Application.Messaging;
+﻿using Mastery.Common.Application.Messaging;
 using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
 using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 
 namespace Mastery.Modules.Identity.Application.Identity.GenerateToken;
 
 internal sealed class GenerateTokenHandler(
-    TimeProvider timeProvider,
     IUnitOfWork unitOfWork,
     IPasswordHasher<User> passwordHasher,
     ITokenService tokenService,
     IUserRepository userRepository,
-    IOptions<JwtSettings> jwtSettings)
+    TimeProvider timeProvider)
     : ICommandHandler<GenerateTokenCommand, TokenResponse>
 {
     public async Task<Result<TokenResponse>> Handle(GenerateTokenCommand command, CancellationToken cancellationToken)
@@ -39,19 +36,16 @@ internal sealed class GenerateTokenHandler(
             user.Id,
             cancellationToken);
 
-        JwtSecurityToken token = tokenService.CreateToken(user, permissions);
+        TokenDto token = tokenService.GenerateToken(user, permissions);
 
         user.SetToken(
-            jwtSettings.Value.LoginProvider,
-            tokenService.GetAccessToken(token),
-            tokenService.GenerateRefreshToken(),
-            timeProvider.GetUtcNow().AddDays(jwtSettings.Value.RefreshTokenExpirationInDays));
+            token.AccessToken,
+            token.RefreshToken,
+            token.RefreshTokenExpiredIn,
+            timeProvider.GetUtcNow());
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        UserToken userToken = user.GetToken(jwtSettings.Value.LoginProvider)
-                              ?? throw new InvalidOperationException("authentication_failed");
-
-        return new TokenResponse(userToken.AccessToken, userToken.RefreshToken, token.ValidTo);
+        return new TokenResponse(token.AccessToken, token.RefreshToken, token.AccessTokenExpiredIn);
     }
 }

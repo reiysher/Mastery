@@ -95,22 +95,22 @@ public sealed class User : Aggregate<Guid>
         PasswordHash = passwordHash;
     }
 
-    public UserToken? GetToken(string loginProvider)
+    public UserToken? GetLastToken()
     {
-        return _tokens.SingleOrDefault(token => token.LoginProvider == loginProvider);
+        return _tokens.MaxBy(token => token.Created);
     }
 
     public void SetToken(
-        string loginProvider,
         string accessToken,
         string refreshToken,
-        DateTimeOffset refreshTokenValidTo)
+        DateTimeOffset refreshTokenValidTo,
+        DateTimeOffset currentTime)
     {
-        UserToken? token = _tokens?.SingleOrDefault(token => token.LoginProvider == loginProvider);
+        UserToken? token = GetLastToken();
 
         if (token is null)
         {
-            token = UserToken.Create(Guid.NewGuid(), loginProvider);
+            token = UserToken.Create(Guid.NewGuid(), currentTime);
             _tokens?.Add(token);
         }
 

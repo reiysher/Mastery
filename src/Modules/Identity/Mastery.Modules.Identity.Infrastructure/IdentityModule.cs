@@ -1,4 +1,6 @@
-﻿using Mastery.Common.Presentation.Endpoints;
+﻿using Mastery.Common.Infrastructure.Authentication;
+using Mastery.Common.Infrastructure.Data;
+using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
 using Mastery.Modules.Identity.Application.Identity;
 using Mastery.Modules.Identity.Domain.Permissions;
@@ -36,14 +38,7 @@ public static class IdentityModule
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
-        services.AddOptions<JwtSettings>()
-            .BindConfiguration(JwtSettings.SectionName)
-            .ValidateDataAnnotations()
-            .ValidateOnStart();
-
-        services.AddIdentity<User, Role>();
-        services.AddTransient<IUserStore<User>, UserStore>();
-        services.AddTransient<IRoleStore<Role>, RoleStore>();
+        services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         services.AddTransient<ITokenService, TokenService>();
 
         services.AddScoped<ISeeder, RolesSeeder>();

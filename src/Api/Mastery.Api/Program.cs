@@ -2,6 +2,7 @@ using HealthChecks.UI.Client;
 using Mastery.Api.Middleware;
 using Mastery.Common.Presentation;
 using Mastery.Common.Presentation.Endpoints;
+using Mastery.Common.Presentation.OpenApi;
 using Mastery.Modules.Identity.Infrastructure;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
@@ -16,8 +17,11 @@ builder.Services.AddProblemDetails();
 
 builder.Configuration.AddModulesConfiguration("identity", "career");
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerPreConfigured(
+    Mastery.Modules.Identity.Presentation.AssemblyReference.Assembly,
+    Mastery.Modules.Identity.Application.AssemblyReference.Assembly,
+    Mastery.Modules.Career.Presentation.AssemblyReference.Assembly,
+    Mastery.Modules.Career.Application.AssemblyReference.Assembly);
 
 string databaseConnectionString = builder.Configuration.GetConnectionString("Database")!;
 string redisConnectionString = builder.Configuration.GetConnectionString("Cache")!;
@@ -39,8 +43,7 @@ WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerPreConfigured();
 
     app.ApplyMigrations();
     await app.SeedDataAsync();
@@ -50,6 +53,7 @@ app.MapHealthChecks("health", new HealthCheckOptions { ResponseWriter = UIRespon
 app.UseLogContext();
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

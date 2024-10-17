@@ -4,26 +4,22 @@ namespace Mastery.Modules.Identity.Domain.Users;
 
 public sealed class UserToken : Entity<Guid>
 {
-
-    public string? Name { get; private set; }
-
-    public string? LoginProvider { get; private set; }
-
     public string? AccessToken { get; private set; }
 
     public string? RefreshToken { get; private set; }
 
     public DateTimeOffset? RefreshTokenValidTo { get; private set; }
 
+    public DateTimeOffset Created { get; private init; }
+
     private UserToken() { }
 
-    public static UserToken Create(Guid id, string loginProvider)
+    public static UserToken Create(Guid id, DateTimeOffset currentTime)
     {
         return new UserToken
         {
             Id = id,
-            Name = loginProvider,
-            LoginProvider = loginProvider,
+            Created = currentTime,
         };
     }
 

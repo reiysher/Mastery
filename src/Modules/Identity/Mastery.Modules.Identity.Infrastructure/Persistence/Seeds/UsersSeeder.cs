@@ -1,4 +1,5 @@
 ﻿using Mastery.Common.Domain;
+using Mastery.Common.Infrastructure.Data;
 using Mastery.Modules.Identity.Domain.Identity;
 using Mastery.Modules.Identity.Domain.Roles;
 using Mastery.Modules.Identity.Domain.Users;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Options;
 namespace Mastery.Modules.Identity.Infrastructure.Persistence.Seeds;
 
 internal sealed class UsersSeeder(
+    IPasswordHasher<User> passwordHasher,
     IdentityDbContext dbContext,
     ILogger<UsersSeeder> logger,
     IOptions<List<DefaultUser>> defaultUsers)
@@ -61,7 +63,6 @@ internal sealed class UsersSeeder(
                 }
 
                 logger.LogInformation("Seeding default user [{Email}].", defaultUser.Email);
-                var passwordHasher = new PasswordHasher<User>();
                 user.SetPasswordHash(passwordHasher.HashPassword(user, defaultUser.Password!));
 
                 await dbContext.AddAsync(user, cancellationToken);
