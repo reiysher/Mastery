@@ -15,7 +15,7 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Configuration.AddModulesConfiguration("identity", "career");
+builder.Configuration.AddModulesConfiguration("identity");
 
 builder.Services.AddSwaggerPreConfigured(
     Mastery.Modules.Identity.Presentation.AssemblyReference.Assembly,
