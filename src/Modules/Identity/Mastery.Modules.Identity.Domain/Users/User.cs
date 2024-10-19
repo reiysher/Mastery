@@ -1,5 +1,4 @@
-﻿using Mastery.Common.Domain;
-using Mastery.Modules.Identity.Domain.Identity;
+﻿using Mastery.Modules.Identity.Domain.Identity;
 using Mastery.Modules.Identity.Domain.Roles;
 
 namespace Mastery.Modules.Identity.Domain.Users;
@@ -27,7 +26,7 @@ public sealed class User : Aggregate<Guid>
 
     private User() { }
 
-    public static Result<User> Create(
+    public static User Create(
         FullName fullName,
         Email email,
         PhoneNumber phoneNumber)

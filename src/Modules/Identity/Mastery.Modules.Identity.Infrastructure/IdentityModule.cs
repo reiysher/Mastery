@@ -1,5 +1,4 @@
-﻿using Mastery.Common.Infrastructure.Authentication;
-using Mastery.Common.Infrastructure.Data;
+﻿using Mastery.Common.Infrastructure.Data;
 using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
 using Mastery.Modules.Identity.Application.Identity;

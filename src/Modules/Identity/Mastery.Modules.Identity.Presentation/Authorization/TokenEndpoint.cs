@@ -1,7 +1,5 @@
 ﻿using System.Net.Mime;
-using Mastery.Common.Domain;
 using Mastery.Common.Presentation.Endpoints;
-using Mastery.Common.Presentation.Results;
 using Mastery.Modules.Identity.Application.Identity;
 using Mastery.Modules.Identity.Application.Identity.GenerateToken;
 using Mastery.Modules.Identity.Application.Identity.RefreshToken;
@@ -27,14 +25,14 @@ internal sealed class TokenEndpoint : IEndpoint
                     case TokenRequest.TokenGrantType.Password:
                         {
                             var command = new GenerateTokenCommand(request.Email, request.Password);
-                            Result<TokenResponse> result = await sender.Send(command, cancellationToken);
-                            return result.Match(Results.Ok, ApiResults.Problem);
+                            TokenResponse result = await sender.Send(command, cancellationToken);
+                            return Results.Ok(result);
                         }
                     case TokenRequest.TokenGrantType.RefreshToken:
                         {
                             var command = new RefreshTokenCommand(request.AccessToken, request.RefreshToken);
-                            Result<TokenResponse> result = await sender.Send(command, cancellationToken);
-                            return result.Match(Results.Ok, ApiResults.Problem);
+                            TokenResponse result = await sender.Send(command, cancellationToken);
+                            return Results.Ok(result);
                         }
 
                 }

@@ -1,6 +1,4 @@
-﻿using Mastery.Common.Domain;
-
-namespace Mastery.Modules.Identity.Domain.Users;
+﻿namespace Mastery.Modules.Identity.Domain.Users;
 
 public sealed record FullName
 {
@@ -10,16 +8,16 @@ public sealed record FullName
 
     private FullName() { }
 
-    public static Result<FullName> From(string firstName, string lastName)
+    public static FullName From(string firstName, string lastName)
     {
         if (string.IsNullOrWhiteSpace(firstName))
         {
-            return Result.Failure<FullName>(UserErrors.InvalidFirstName);
+            throw new InvalidOperationException(UserErrors.InvalidFirstName);
         }
 
         if (string.IsNullOrWhiteSpace(lastName))
         {
-            return Result.Failure<FullName>(UserErrors.InvalidLastName);
+            throw new InvalidOperationException(UserErrors.InvalidLastName);
         }
 
         return new FullName

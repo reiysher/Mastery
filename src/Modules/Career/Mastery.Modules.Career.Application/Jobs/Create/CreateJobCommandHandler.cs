@@ -1,5 +1,4 @@
 ﻿using Mastery.Common.Application.Messaging;
-using Mastery.Common.Domain;
 using Mastery.Modules.Career.Application.Abstractions.Data;
 using Mastery.Modules.Career.Domain.Companies;
 using Mastery.Modules.Career.Domain.Jobs;

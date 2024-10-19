@@ -1,5 +1,4 @@
-﻿using Mastery.Common.Domain;
-using Mastery.Common.Presentation.Endpoints;
+﻿using Mastery.Common.Presentation.Endpoints;
 using Mastery.Modules.Career.Application.Categories.Create;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

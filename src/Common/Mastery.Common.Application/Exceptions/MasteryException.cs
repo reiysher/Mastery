@@ -1,10 +1,8 @@
-﻿using Mastery.Common.Domain;
-
-namespace Mastery.Common.Application.Exceptions;
+﻿namespace Mastery.Common.Application.Exceptions;
 
 public sealed class MasteryException : Exception
 {
-    public MasteryException(string requestName, Error? error = null, Exception? innerException = default)
+    public MasteryException(string requestName, string? error = null, Exception? innerException = default)
         : base("Application Exception", innerException)
     {
         RequestName = requestName;
@@ -13,5 +11,5 @@ public sealed class MasteryException : Exception
 
     public string RequestName { get; }
 
-    public Error? Error { get; }
+    public string? Error { get; }
 }

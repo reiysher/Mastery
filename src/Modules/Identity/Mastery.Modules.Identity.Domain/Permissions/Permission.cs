@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Mastery.Common.Domain;
 
 namespace Mastery.Modules.Identity.Domain.Permissions;
 

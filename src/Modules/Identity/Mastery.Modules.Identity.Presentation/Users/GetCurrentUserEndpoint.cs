@@ -1,7 +1,5 @@
 ﻿using System.Net.Mime;
-using Mastery.Common.Domain;
 using Mastery.Common.Presentation.Endpoints;
-using Mastery.Common.Presentation.Results;
 using Mastery.Modules.Identity.Application.Identity.GetCurrentUser;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -19,11 +17,11 @@ internal sealed class GetCurrentUserEndpoint : IEndpoint
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>
         {
-            Result<GetCurrentUserResponse> result = await sender.Send(
+            GetCurrentUserResponse result = await sender.Send(
                 new GetCurrentUserQuery(),
                 cancellationToken);
 
-            return result.Match(Results.Ok, ApiResults.Problem);
+            return Results.Ok(result);
 
         })
             .RequireAuthorization("users:read")

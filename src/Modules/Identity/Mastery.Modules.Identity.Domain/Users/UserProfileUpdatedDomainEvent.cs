@@ -1,6 +1,4 @@
-﻿using Mastery.Common.Domain;
-
-namespace Mastery.Modules.Identity.Domain.Users;
+﻿namespace Mastery.Modules.Identity.Domain.Users;
 
 public sealed class UserProfileUpdatedDomainEvent(Guid userId, string firstName, string lastName) : DomainEvent
 {

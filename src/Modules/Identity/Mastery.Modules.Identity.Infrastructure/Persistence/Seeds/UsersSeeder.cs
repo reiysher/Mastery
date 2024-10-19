@@ -1,5 +1,4 @@
-﻿using Mastery.Common.Domain;
-using Mastery.Common.Infrastructure.Data;
+﻿using Mastery.Common.Infrastructure.Data;
 using Mastery.Modules.Identity.Domain.Identity;
 using Mastery.Modules.Identity.Domain.Roles;
 using Mastery.Modules.Identity.Domain.Users;
@@ -28,39 +27,14 @@ internal sealed class UsersSeeder(
             if (await dbContext.Set<User>().SingleOrDefaultAsync(u => u.Email!.Value == defaultUser.Email, cancellationToken)
                 is not { } user)
             {
-                Result<FullName> fullNameResult = FullName.From(defaultUser.FirstName, defaultUser.LastName);
-                if (fullNameResult.IsFailure)
-                {
-                    logger.LogInformation("Cannot create user [{Email}].", defaultUser.Email);
-                    continue;
-                }
+                var fullName = FullName.From(defaultUser.FirstName, defaultUser.LastName);
+                var email = Email.Parse(defaultUser.Email);
+                var phoneNumber = PhoneNumber.Parse(defaultUser.CountryCode, defaultUser.PhoneNumber);
 
-                Result<Email> emailResult = Email.Parse(defaultUser.Email);
-                if (emailResult.IsFailure)
-                {
-                    logger.LogInformation("Cannot create user [{Email}].", defaultUser.Email);
-                    continue;
-                }
-
-                Result<PhoneNumber> phoneNumberResult = PhoneNumber.Parse(defaultUser.CountryCode, defaultUser.PhoneNumber);
-                if (phoneNumberResult.IsFailure)
-                {
-                    logger.LogInformation("Cannot create user [{Email}].", defaultUser.Email);
-                    continue;
-                }
-
-                Result<User> userResult = User.Create(
-                    fullNameResult.Value,
-                    emailResult.Value,
-                    phoneNumberResult.Value);
-
-                user = userResult.Value;
-
-                if (userResult.IsFailure)
-                {
-                    logger.LogInformation("Cannot create user [{Email}].", defaultUser.Email);
-                    continue;
-                }
+                user = User.Create(
+                    fullName,
+                    email,
+                    phoneNumber);
 
                 logger.LogInformation("Seeding default user [{Email}].", defaultUser.Email);
                 user.SetPasswordHash(passwordHasher.HashPassword(user, defaultUser.Password!));

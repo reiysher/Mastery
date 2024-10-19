@@ -1,5 +1,4 @@
 ﻿using Mastery.Common.Infrastructure.Data;
-using Mastery.Modules.Career.Infrastructure.Persistence;
 using Mastery.Modules.Identity.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

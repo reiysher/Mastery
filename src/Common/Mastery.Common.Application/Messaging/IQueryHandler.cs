@@ -1,7 +1,6 @@
-﻿using Mastery.Common.Domain;
-using MediatR;
+﻿using MediatR;
 
 namespace Mastery.Common.Application.Messaging;
 
-public interface IQueryHandler<TQuery, TResponse> : IRequestHandler<TQuery, Result<TResponse>>
+public interface IQueryHandler<in TQuery, TResponse> : IRequestHandler<TQuery, TResponse>
     where TQuery : IQuery<TResponse>;

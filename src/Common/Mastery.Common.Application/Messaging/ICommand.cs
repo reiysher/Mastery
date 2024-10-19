@@ -1,10 +1,9 @@
-﻿using Mastery.Common.Domain;
-using MediatR;
+﻿using MediatR;
 
 namespace Mastery.Common.Application.Messaging;
 
-public interface ICommand : IRequest<Result>, IBaseCommand;
+public interface ICommand : IRequest, IBaseCommand;
 
-public interface ICommand<TResponse> : IRequest<Result<TResponse>>, IBaseCommand;
+public interface ICommand<out TResponse> : IRequest<TResponse>, IBaseCommand;
 
 public interface IBaseCommand;

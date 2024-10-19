@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Domain.Users;
 
 namespace Mastery.Modules.Identity.Domain.Identity;
@@ -16,16 +15,16 @@ public sealed partial record PhoneNumber
 
     private PhoneNumber() { }
 
-    public static Result<PhoneNumber> Parse(string? countryCode, string? phoneNumber)
+    public static PhoneNumber Parse(string? countryCode, string? phoneNumber)
     {
         if (string.IsNullOrWhiteSpace(countryCode) || !countryCode.StartsWith('+'))
         {
-            return Result.Failure<PhoneNumber>(UserErrors.InvalidPhoneNumber);
+            throw new InvalidOperationException(UserErrors.InvalidPhoneNumber);
         }
 
         if (string.IsNullOrWhiteSpace(phoneNumber) || phoneNumber.Length != 10 || !PhoneNumberValidationRegex().IsMatch(phoneNumber))
         {
-            return Result.Failure<PhoneNumber>(UserErrors.InvalidPhoneNumber);
+            throw new InvalidOperationException(UserErrors.InvalidPhoneNumber);
         }
 
         return new PhoneNumber

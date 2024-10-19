@@ -1,6 +1,5 @@
 ﻿using Mastery.Common.Application.Messaging;
 using Mastery.Common.Application.Security;
-using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Domain.Users;
 
 namespace Mastery.Modules.Identity.Application.Identity.GetCurrentUser;
@@ -10,7 +9,7 @@ internal sealed class GetCurrentUserHandler(
     ICurrentUserContext currentUserContext)
     : IQueryHandler<GetCurrentUserQuery, GetCurrentUserResponse>
 {
-    public async Task<Result<GetCurrentUserResponse>> Handle(GetCurrentUserQuery query, CancellationToken cancellationToken)
+    public async Task<GetCurrentUserResponse> Handle(GetCurrentUserQuery query, CancellationToken cancellationToken)
     {
         GetCurrentUserResponse? userDto = await userRepository.GetByIdAsync(
             currentUserContext.UserId,

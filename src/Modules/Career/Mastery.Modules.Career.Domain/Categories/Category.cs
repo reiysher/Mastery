@@ -12,21 +12,21 @@ public sealed class Category : Aggregate<Guid>
 
     private Category() { }
 
-    public static Result<Category> Create(Guid id, string value, string color, string? description = "")
+    public static Category Create(Guid id, string value, string color, string? description = "")
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            return Result.Failure<Category>(CategoryErrors.InvalidValue);
+            throw new InvalidOperationException(CategoryErrors.InvalidValue);
         }
 
         if (string.IsNullOrWhiteSpace(color))
         {
-            return Result.Failure<Category>(CategoryErrors.InvalidColor);
+            throw new InvalidOperationException(CategoryErrors.InvalidColor);
         }
 
         if (string.IsNullOrWhiteSpace(description))
         {
-            return Result.Failure<Category>(CategoryErrors.InvalidDescription);
+            throw new InvalidOperationException(CategoryErrors.InvalidDescription);
         }
 
         var category = new Category

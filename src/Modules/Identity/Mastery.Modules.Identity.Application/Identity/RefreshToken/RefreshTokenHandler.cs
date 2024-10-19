@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Mastery.Common.Application.Messaging;
-using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
 using Mastery.Modules.Identity.Domain.Users;
 
@@ -13,7 +12,7 @@ internal sealed class RefreshTokenHandler(
     TimeProvider timeProvider)
     : ICommandHandler<RefreshTokenCommand, TokenResponse>
 {
-    public async Task<Result<TokenResponse>> Handle(RefreshTokenCommand command, CancellationToken cancellationToken)
+    public async Task<TokenResponse> Handle(RefreshTokenCommand command, CancellationToken cancellationToken)
     {
         ClaimsPrincipal userPrincipal = tokenService.GetPrincipalFromExpiredToken(command.AccessToken);
         string userEmail = userPrincipal.FindFirstValue(ClaimTypes.Email);

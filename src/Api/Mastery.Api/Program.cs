@@ -19,20 +19,16 @@ builder.Configuration.AddModulesConfiguration("identity", "career");
 
 builder.Services.AddSwaggerPreConfigured(
     Mastery.Modules.Identity.Presentation.AssemblyReference.Assembly,
-    Mastery.Modules.Identity.Application.AssemblyReference.Assembly,
-    Mastery.Modules.Career.Presentation.AssemblyReference.Assembly,
-    Mastery.Modules.Career.Application.AssemblyReference.Assembly);
+    Mastery.Modules.Identity.Application.AssemblyReference.Assembly);
 
 string databaseConnectionString = builder.Configuration.GetConnectionString("Database")!;
 string redisConnectionString = builder.Configuration.GetConnectionString("Cache")!;
 
 builder.Services.AddCommonApplication(
-    Mastery.Modules.Identity.Application.AssemblyReference.Assembly,
-    Mastery.Modules.Career.Application.AssemblyReference.Assembly);
+    Mastery.Modules.Identity.Application.AssemblyReference.Assembly);
 builder.Services.AddCommonInfrastructure(databaseConnectionString, redisConnectionString);
 builder.Services.AddCommonPresentation();
 
-builder.Services.AddCareerModule(builder.Configuration);
 builder.Services.AddIdentityModule(databaseConnectionString);
 
 builder.Services.AddHealthChecks()

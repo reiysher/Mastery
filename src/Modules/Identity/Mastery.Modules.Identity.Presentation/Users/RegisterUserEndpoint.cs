@@ -1,8 +1,5 @@
 ﻿using System.Net.Mime;
-using Mastery.Common.Domain;
 using Mastery.Common.Presentation.Endpoints;
-using Mastery.Common.Presentation.Results;
-using Mastery.Modules.Identity.Application.Identity;
 using Mastery.Modules.Identity.Application.Identity.Register;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -21,11 +18,11 @@ internal sealed class RegisterUserEndpoint : IEndpoint
                 [FromBody] RegisterUserRequest request,
                 CancellationToken cancellationToken) =>
                 {
-                    Result<RegisterUserResponse> result = await sender.Send(
+                    RegisterUserResponse result = await sender.Send(
                         request.ToCommand(),
                         cancellationToken);
 
-                    return result.Match(Results.Ok, ApiResults.Problem);
+                    return Results.Ok(result);
 
                 })
             .AllowAnonymous()

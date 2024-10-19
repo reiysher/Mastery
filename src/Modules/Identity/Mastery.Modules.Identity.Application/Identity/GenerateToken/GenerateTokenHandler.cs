@@ -1,5 +1,4 @@
 ﻿using Mastery.Common.Application.Messaging;
-using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
 using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +13,7 @@ internal sealed class GenerateTokenHandler(
     TimeProvider timeProvider)
     : ICommandHandler<GenerateTokenCommand, TokenResponse>
 {
-    public async Task<Result<TokenResponse>> Handle(GenerateTokenCommand command, CancellationToken cancellationToken)
+    public async Task<TokenResponse> Handle(GenerateTokenCommand command, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(command.Email) || string.IsNullOrWhiteSpace(command.Password))
         {

@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Mastery.Common.Infrastructure.Data;
+﻿namespace Mastery.Common.Infrastructure.Data;
 
 public interface ISeeder
 {

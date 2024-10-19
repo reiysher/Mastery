@@ -1,6 +1,4 @@
-﻿using Mastery.Modules.Identity.Domain.Users;
-
-namespace Mastery.Modules.Identity.Domain.Roles;
+﻿namespace Mastery.Modules.Identity.Domain.Roles;
 
 public interface IRoleRepository
 {

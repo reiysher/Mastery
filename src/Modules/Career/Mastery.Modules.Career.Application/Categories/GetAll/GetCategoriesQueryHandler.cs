@@ -2,7 +2,6 @@
 using Dapper;
 using Mastery.Common.Application.Data;
 using Mastery.Common.Application.Messaging;
-using Mastery.Common.Domain;
 
 namespace Mastery.Modules.Career.Application.Categories.GetAll;
 

@@ -2,11 +2,11 @@
 
 public static class CategoryErrors
 {
-    public static readonly Error NotFound = new("Category.NotFound", "Category with specified identifier not found");
+    public const string NotFound = "Category with specified identifier not found";
 
-    public static readonly Error InvalidValue = new("Category.Value", "Provided value is invalid");
+    public const string InvalidValue = "Provided value is invalid";
 
-    public static readonly Error InvalidColor = new("Category.Color", "Provided color is invalid");
+    public const string InvalidColor = "Provided color is invalid";
 
-    public static readonly Error InvalidDescription = new("Category.Description", "Provided description is invalid");
+    public const string InvalidDescription = "Provided description is invalid";
 }

@@ -1,6 +1,5 @@
-﻿using Mastery.Common.Domain;
-using MediatR;
+﻿using MediatR;
 
 namespace Mastery.Common.Application.Messaging;
 
-public interface IQuery<TResponse> : IRequest<Result<TResponse>>;
+public interface IQuery<out TResponse> : IRequest<TResponse>;

@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using Mastery.Common.Domain;
 using Mastery.Modules.Identity.Domain.Users;
 
 namespace Mastery.Modules.Identity.Domain.Identity;
@@ -14,11 +13,11 @@ public sealed partial record Email
 
     public bool Confirmed { get; private set; }
 
-    public static Result<Email> Parse(string value)
+    public static Email Parse(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || !EmailValidationRegex().IsMatch(value))
         {
-            return Result.Failure<Email>(UserErrors.InvalidEmail);
+            throw new InvalidOperationException(UserErrors.InvalidEmail);
         }
 
         return new Email
