@@ -1,6 +1,3 @@
 ﻿namespace Mastery.Modules.Identity.Domain.Users;
 
-public sealed class UserRegisteredDomainEvent(Guid userId) : DomainEvent
-{
-    public Guid UserId { get; init; } = userId;
-}
+public sealed record UserRegisteredDomainEvent(Guid UserId) : DomainEvent;

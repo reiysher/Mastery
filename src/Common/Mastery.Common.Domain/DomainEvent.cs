@@ -1,6 +1,6 @@
 ﻿namespace Mastery.Common.Domain;
 
-public abstract class DomainEvent : IDomainEvent
+public abstract record DomainEvent : IDomainEvent
 {
     protected DomainEvent()
     {
