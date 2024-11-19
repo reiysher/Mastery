@@ -1,9 +1,8 @@
 ﻿using System.Text.RegularExpressions;
-using Mastery.Modules.Identity.Domain.Users;
 
-namespace Mastery.Modules.Identity.Domain.Identity;
+namespace Mastery.Modules.Identity.Domain.Users;
 
-public sealed partial record PhoneNumber
+public sealed record PhoneNumber
 {
     private const string Pattern = "^[0-9]+$";
 
@@ -22,7 +21,7 @@ public sealed partial record PhoneNumber
             throw new InvalidOperationException(UserErrors.InvalidPhoneNumber);
         }
 
-        if (string.IsNullOrWhiteSpace(phoneNumber) || phoneNumber.Length != 10 || !PhoneNumberValidationRegex().IsMatch(phoneNumber))
+        if (string.IsNullOrWhiteSpace(phoneNumber) || phoneNumber.Length != 10 || !Regex.IsMatch(phoneNumber, Pattern))
         {
             throw new InvalidOperationException(UserErrors.InvalidPhoneNumber);
         }
@@ -34,7 +33,4 @@ public sealed partial record PhoneNumber
             Confirmed = false,
         };
     }
-
-    [GeneratedRegex(Pattern)]
-    private static partial Regex PhoneNumberValidationRegex();
 }

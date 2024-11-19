@@ -9,6 +9,10 @@ public static class CacheOptions
         AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2),
     };
 
-    public static DistributedCacheEntryOptions Create(TimeSpan? expiration) =>
-        expiration.HasValue ? new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = expiration } : DefaultExpiration;
+    public static DistributedCacheEntryOptions Create(TimeSpan? expiration)
+    {
+        return expiration.HasValue
+            ? new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = expiration }
+            : DefaultExpiration;
+    }
 }

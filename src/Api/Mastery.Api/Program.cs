@@ -17,9 +17,7 @@ builder.Services.AddProblemDetails();
 
 builder.Configuration.AddModulesConfiguration("identity");
 
-builder.Services.AddSwaggerPreConfigured(
-    Mastery.Modules.Identity.Presentation.AssemblyReference.Assembly,
-    Mastery.Modules.Identity.Application.AssemblyReference.Assembly);
+builder.Services.AddOpenApiPreConfigured();
 
 string databaseConnectionString = builder.Configuration.GetConnectionString("Database")!;
 string redisConnectionString = builder.Configuration.GetConnectionString("Cache")!;
@@ -39,7 +37,7 @@ WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwaggerPreConfigured();
+    app.MapOpenApiPreConfigured();
 
     app.ApplyMigrations();
     await app.SeedDataAsync();

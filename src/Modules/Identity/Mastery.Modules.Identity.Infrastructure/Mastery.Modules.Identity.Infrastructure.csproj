@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Mastery.Common.Infrastructure\Mastery.Common.Infrastructure.csproj" />
-    <ProjectReference Include="..\Mastery.Modules.Identity.Application\Mastery.Modules.Identity.Application.csproj" />
-    <ProjectReference Include="..\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common\Mastery.Common.Infrastructure\Mastery.Common.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Mastery.Modules.Identity.Application\Mastery.Modules.Identity.Application.csproj"/>
+        <ProjectReference Include="..\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistence\Migrations\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Persistence\Migrations\"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.32.0.97167">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Update="SonarAnalyzer.CSharp" Version="9.32.0.97167">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 ﻿using Mastery.Common.Application.Messaging;
 using Mastery.Modules.Identity.Application.Abstractions.Data;
-using Mastery.Modules.Identity.Domain.Identity;
 using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 

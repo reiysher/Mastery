@@ -7,11 +7,11 @@ namespace Mastery.Common.Presentation.OpenApi;
 
 public static class OpenApiConfiguration
 {
-    public static IServiceCollection AddSwaggerPreConfigured(
+    public static IServiceCollection AddOpenApiPreConfigured(
         this IServiceCollection services,
         params Assembly[] assemblies)
     {
-        services.AddEndpointsApiExplorer();
+        services.AddOpenApi();
         services.AddSwaggerGen(options =>
         {
             foreach (Assembly assembly in assemblies)
@@ -47,7 +47,7 @@ public static class OpenApiConfiguration
         return services;
     }
 
-    public static IApplicationBuilder UseSwaggerPreConfigured(this IApplicationBuilder app)
+    public static IApplicationBuilder MapOpenApiPreConfigured(this IApplicationBuilder app)
     {
         app.UseSwagger();
         app.UseSwaggerUI(options =>

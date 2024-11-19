@@ -35,11 +35,10 @@ internal sealed class TokenEndpoint : IEndpoint
                             return Results.Ok(result);
                         }
 
+                    default:
+                        return Results.BadRequest();
                 }
-
-                return Results.BadRequest();
-            }
-            )
+            })
             .AllowAnonymous()
             .Produces<TokenResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
             .WithOpenApi()

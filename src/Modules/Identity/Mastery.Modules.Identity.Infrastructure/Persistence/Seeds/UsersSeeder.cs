@@ -1,5 +1,4 @@
 ﻿using Mastery.Common.Infrastructure.Data;
-using Mastery.Modules.Identity.Domain.Identity;
 using Mastery.Modules.Identity.Domain.Roles;
 using Mastery.Modules.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;

@@ -1,9 +1,8 @@
 ﻿using System.Text.RegularExpressions;
-using Mastery.Modules.Identity.Domain.Users;
 
-namespace Mastery.Modules.Identity.Domain.Identity;
+namespace Mastery.Modules.Identity.Domain.Users;
 
-public sealed partial record Email
+public sealed record Email
 {
     private const string Pattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
 
@@ -15,7 +14,7 @@ public sealed partial record Email
 
     public static Email Parse(string value)
     {
-        if (string.IsNullOrWhiteSpace(value) || !EmailValidationRegex().IsMatch(value))
+        if (string.IsNullOrWhiteSpace(value) || !Regex.IsMatch(value, Pattern))
         {
             throw new InvalidOperationException(UserErrors.InvalidEmail);
         }
@@ -26,7 +25,4 @@ public sealed partial record Email
             Confirmed = false,
         };
     }
-
-    [GeneratedRegex(Pattern)]
-    private static partial Regex EmailValidationRegex();
 }

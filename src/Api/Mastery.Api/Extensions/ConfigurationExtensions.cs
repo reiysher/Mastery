@@ -2,7 +2,7 @@
 
 internal static class ConfigurationExtensions
 {
-    internal static void AddModulesConfiguration(this IConfigurationBuilder configurationBuilder, params string[] modules)
+    internal static void AddModulesConfiguration(this IConfigurationBuilder configurationBuilder, params IReadOnlyCollection<string> modules)
     {
         foreach (string module in modules)
         {

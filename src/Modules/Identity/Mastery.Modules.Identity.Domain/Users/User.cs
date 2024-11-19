@@ -1,5 +1,4 @@
-﻿using Mastery.Modules.Identity.Domain.Identity;
-using Mastery.Modules.Identity.Domain.Roles;
+﻿using Mastery.Modules.Identity.Domain.Roles;
 
 namespace Mastery.Modules.Identity.Domain.Users;
 
