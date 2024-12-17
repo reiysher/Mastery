@@ -10,7 +10,6 @@ internal static class MigrationExtensions
     {
         using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-        //ApplyMigration<CareerDbContext>(scope);
         ApplyMigration<IdentityDbContext>(scope);
     }
 
@@ -28,7 +27,7 @@ internal static class MigrationExtensions
         using IServiceScope scope = app.ApplicationServices.CreateScope();
         IOrderedEnumerable<ISeeder> seeders = scope.ServiceProvider
             .GetServices<ISeeder>()
-            .OrderBy(s => s.Order);
+            .OrderBy(seeder => seeder.Order);
 
         foreach (ISeeder? seeder in seeders)
         {
