@@ -8,8 +8,8 @@ services:
       context: .
       dockerfile: src/API/Mastery.Api/Dockerfile
     ports:
-      - 8000:8080
-      - 8001:8081
+      - "8000:8080"
+      - "8001:8081"
 
   mastery.database:
     image: postgres:latest
@@ -21,7 +21,7 @@ services:
     volumes:
       - ./.containers/db:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "5432:5432"
 
   mastery.seq:
     image: datalust/seq:latest
@@ -29,12 +29,12 @@ services:
     environment:
       - ACCEPT_EULA=Y
     ports:
-      - 5341:5341
-      - 8081:80
+      - "5341:5341"
+      - "8081:80"
 
   mastery.redis:
     image: redis:latest
     container_name: Mastery.Redis
     restart: always
     ports:
-      - 6379:6379
+      - "6379:6379"

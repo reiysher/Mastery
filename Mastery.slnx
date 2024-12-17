@@ -1,23 +1,23 @@
 ﻿<Solution>
-    <Folder Name="/Solution Items/">
-        <File Path="Directory.Build.props" />
-    </Folder>
-    <Folder Name="/src/" />
-    <Folder Name="/src/Api/">
-        <Project Path="src\Api\Mastery.Api\Mastery.Api.csproj" />
-    </Folder>
-    <Folder Name="/src/Common/">
-        <Project Path="src\Common\Mastery.Common.Application\Mastery.Common.Application.csproj" />
-        <Project Path="src\Common\Mastery.Common.Domain\Mastery.Common.Domain.csproj" />
-        <Project Path="src\Common\Mastery.Common.Infrastructure\Mastery.Common.Infrastructure.csproj" />
-        <Project Path="src\Common\Mastery.Common.Presentation\Mastery.Common.Presentation.csproj" />
-    </Folder>
-    <Folder Name="/src/Modules/" />
-    <Folder Name="/src/Modules/Identity/">
-        <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Application\Mastery.Modules.Identity.Application.csproj" />
-        <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Domain\Mastery.Modules.Identity.Domain.csproj" />
-        <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Infrastructure\Mastery.Modules.Identity.Infrastructure.csproj" />
-        <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj" />
-    </Folder>
-    <Project Path="docker-compose.dcproj" />
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Api/">
+    <Project Path="src\Api\Mastery.Api\Mastery.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Common/">
+    <Project Path="src\Common\Mastery.Common.Application\Mastery.Common.Application.csproj" />
+    <Project Path="src\Common\Mastery.Common.Domain\Mastery.Common.Domain.csproj" />
+    <Project Path="src\Common\Mastery.Common.Infrastructure\Mastery.Common.Infrastructure.csproj" />
+    <Project Path="src\Common\Mastery.Common.Presentation\Mastery.Common.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Identity/">
+    <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Application\Mastery.Modules.Identity.Application.csproj" />
+    <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Domain\Mastery.Modules.Identity.Domain.csproj" />
+    <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Infrastructure\Mastery.Modules.Identity.Infrastructure.csproj" />
+    <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj" />
+  </Folder>
+  <Project Path="docker-compose.dcproj" />
 </Solution>
