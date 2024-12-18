@@ -15,7 +15,7 @@ internal sealed class TokenEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("connect/token", async (
+        _ = app.MapPost("connect/token", async (
                 [FromServices] ISender sender,
                 [FromBody] TokenRequest request,
                 CancellationToken cancellationToken) =>
