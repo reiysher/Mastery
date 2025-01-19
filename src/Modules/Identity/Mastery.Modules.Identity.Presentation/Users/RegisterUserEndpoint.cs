@@ -18,6 +18,8 @@ internal sealed class RegisterUserEndpoint : IEndpoint
                 [FromBody] RegisterUserRequest request,
                 CancellationToken cancellationToken) =>
                 {
+                    throw new Exception("Some error");
+
                     RegisterUserResponse result = await sender.Send(
                         request.ToCommand(),
                         cancellationToken);
@@ -26,7 +28,9 @@ internal sealed class RegisterUserEndpoint : IEndpoint
 
                 })
             .AllowAnonymous()
-            .Produces<RegisterUserResponse>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)
+            .Produces<RegisterUserResponse>(
+                StatusCodes.Status201Created,
+                MediaTypeNames.Application.Json)
             .WithOpenApi()
             .WithTags("Users");
     }

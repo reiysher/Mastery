@@ -18,6 +18,7 @@
     <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Domain\Mastery.Modules.Identity.Domain.csproj" />
     <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Infrastructure\Mastery.Modules.Identity.Infrastructure.csproj" />
     <Project Path="src\Modules\Identity\Mastery.Modules.Identity.Presentation\Mastery.Modules.Identity.Presentation.csproj" />
+    <Project Path="src\Modules\Identity\Mastery.Modules.Identity.UnitTests\Mastery.Modules.Identity.UnitTests.csproj" Type="Classic C#" />
   </Folder>
   <Project Path="docker-compose.dcproj" />
 </Solution>
