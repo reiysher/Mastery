@@ -1,7 +1,6 @@
 using HealthChecks.UI.Client;
 using Mastery.Api.Middleware;
 using Mastery.Common.Infrastructure.ExceptionHandling;
-using Mastery.Common.Infrastructure.ExceptionHandling.ExceptionDetails;
 using Mastery.Common.Presentation;
 using Mastery.Common.Presentation.Endpoints;
 using Mastery.Common.Presentation.OpenApi;
@@ -41,7 +40,6 @@ builder.Services.AddHealthChecks()
 
 WebApplication app = builder.Build();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApiPreConfigured();
@@ -61,3 +59,4 @@ app.UseAuthorization();
 app.MapEndpoints();
 
 await app.RunAsync();
+
