@@ -38,7 +38,7 @@ public static class OpenApiConfiguration
                     Id = "Bearer"
                 }
             },
-            Array.Empty<string>()
+            []
         }});
 
             options.SwaggerDoc("default", new OpenApiInfo { Title = "Mastery", Version = "default" });

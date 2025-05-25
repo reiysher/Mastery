@@ -10,8 +10,7 @@ internal sealed class CurrentUserContext(IHttpContextAccessor httpContextAccesso
     {
         get
         {
-            if (Guid.TryParse(httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier),
-                out Guid userId))
+            if (Guid.TryParse(httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
             {
                 return userId;
             }
