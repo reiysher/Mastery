@@ -1,4 +1,8 @@
 ﻿<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Api/" />
+  <Folder Name="/src/Common/" />
+  <Folder Name="/src/Modules/" />
   <Folder Name="/Stuff/">
     <File Path="todo.md" />
   </Folder>
