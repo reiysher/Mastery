@@ -13,6 +13,6 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
     <File Path=".gitignore" />
-    <File Path="build.yml" />
+    <File Path=".github/workflows/build.yml" />
   </Folder>
 </Solution>
