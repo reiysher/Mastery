@@ -1,8 +1,9 @@
 ﻿<Solution>
-  <Folder Name="/src/">
-    <Project Path="src\Mastery.AppHost\Mastery.AppHost.csproj" Type="Classic C#" />
-    <Project Path="src\Mastery.ServiceDefaults\Mastery.ServiceDefaults.csproj" Type="Classic C#" />
+  <Folder Name="/aspire/">
+    <Project Path="aspire\Mastery.AppHost\Mastery.AppHost.csproj" Type="Classic C#" />
+    <Project Path="aspire\Mastery.ServiceDefaults\Mastery.ServiceDefaults.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/src/" />
   <Folder Name="/src/Api/">
     <Project Path="src\Api\Mastery.Api\Mastery.Api.csproj" Type="Classic C#" />
   </Folder>

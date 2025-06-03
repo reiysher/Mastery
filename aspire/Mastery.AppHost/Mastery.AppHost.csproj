@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Api\Mastery.Api\Mastery.Api.csproj" />
+      <ProjectReference Include="..\..\src\Api\Mastery.Api\Mastery.Api.csproj" />
     </ItemGroup>
 
 </Project>
