@@ -9,6 +9,11 @@
   </Folder>
   <Folder Name="/src/Common/" />
   <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Assistant/">
+    <Project Path="src\Modules\Assistant\Mastery.Assistant.Application\Mastery.Assistant.Application.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Assistant\Mastery.Assistant.Domain\Mastery.Assistant.Domain.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Assistant\Mastery.Assistant.Infrastructure\Mastery.Assistant.Infrastructure.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/stuff/">
     <File Path="todo.md" />
     <File Path="Directory.Build.props" />
