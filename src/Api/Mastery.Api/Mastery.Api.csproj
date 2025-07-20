@@ -5,4 +5,8 @@
         <PackageReference Include="Scalar.AspNetCore" />
     </ItemGroup>
     
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\aspire\Mastery.ServiceDefaults\Mastery.ServiceDefaults.csproj" />
+    </ItemGroup>
+    
 </Project>
