@@ -7,13 +7,12 @@
   <Folder Name="/src/Api/">
     <Project Path="src\Api\Mastery.Api\Mastery.Api.csproj" Type="Classic C#" />
   </Folder>
-  <Folder Name="/src/Common/" />
-  <Folder Name="/src/Modules/" />
-  <Folder Name="/src/Modules/Assistant/">
-    <Project Path="src\Modules\Assistant\Mastery.Assistant.Application\Mastery.Assistant.Application.csproj" Type="Classic C#" />
-    <Project Path="src\Modules\Assistant\Mastery.Assistant.Domain\Mastery.Assistant.Domain.csproj" Type="Classic C#" />
-    <Project Path="src\Modules\Assistant\Mastery.Assistant.Infrastructure\Mastery.Assistant.Infrastructure.csproj" Type="Classic C#" />
+  <Folder Name="/src/Common/">
+    <Project Path="src\Common\Mastery.Common.ApplicationBus\Mastery.Common.ApplicationBus.csproj" Type="Classic C#" />
+    <Project Path="src\Common\Mastery.Common.Database\Mastery.Common.Database.csproj" Type="Classic C#" />
+    <Project Path="src\Common\Mastery.Common.Endpoints\Mastery.Common.Endpoints.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/src/Modules/" />
   <Folder Name="/stuff/">
     <File Path="todo.md" />
     <File Path="Directory.Build.props" />
