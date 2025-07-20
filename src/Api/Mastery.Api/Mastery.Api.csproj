@@ -7,6 +7,7 @@
     
     <ItemGroup>
       <ProjectReference Include="..\..\..\aspire\Mastery.ServiceDefaults\Mastery.ServiceDefaults.csproj" />
+      <ProjectReference Include="..\..\Modules\Assistant\Mastery.Assistant.Infrastructure\Mastery.Assistant.Infrastructure.csproj" />
     </ItemGroup>
     
 </Project>

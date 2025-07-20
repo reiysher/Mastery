@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Mastery.Assistant.Application\Mastery.Assistant.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="GigaChat.SemanticKernel" />
+    </ItemGroup>
+
 </Project>
