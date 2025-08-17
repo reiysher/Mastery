@@ -1,6 +1,6 @@
-@Mastery.Api_HostAddress = http://localhost:5001
+@Mastery.Api_HostAddress = http://localhost:8000
 
-GET {{Mastery.Api_HostAddress}}/weatherforecast/
+GET {{Mastery.Api_HostAddress}}/
 Accept: application/json
 
 ###
